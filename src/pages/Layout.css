@@ -1,0 +1,53 @@
+h1, h2, h3, h4, h5, h6, a, p, li, input, textarea, span, div {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+hr {
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-bottom: 0px;
+}
+
+/* Structural Styles */
+
+.window-height {
+  height: 100vh;
+}
+
+.full-height {
+  align-self: stretch;
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.center-children {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.padded {
+  padding: 30px;
+}
+
+/* Page Layout */
+
+.ant-layout {
+  background: #edf3f6;
+}
+
+#header {
+  background: #fff;
+  border-bottom: 1px solid #e3eff5;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+}
+
+  #logo {
+    color: #515365;
+    font-size: 14px;
+    font-weight: 600;
+  }
