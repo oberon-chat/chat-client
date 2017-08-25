@@ -2,10 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { isLoggedIn } from '../reducers/currentUser'
-import { Layout as LayoutComponent } from 'antd'
 import Header from './Layout/_Header'
 import DraggableBanner from './Layout/_DraggableBanner'
 import FlashMessages from '../components/FlashMessages'
+import Page from './Layout/_Page'
 import './Layout.css'
 
 import Login from './Login'
@@ -22,12 +22,12 @@ export const Layout = ({ loggedIn }) => {
   )
 
   return (
-    <LayoutComponent className='ant-layout-has-sider window-height'>
+    <Page>
       <DraggableBanner />
       <FlashMessages />
       <Header />
       { loggedIn ? loggedInRoutes : loggedOutRoutes }
-    </LayoutComponent>
+    </Page>
   )
 }
 

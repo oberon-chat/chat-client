@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { login as loginCurrentUser } from '../../actions/currentUser'
+import { fetchSocket } from '../../actions/socket'
 import { isLoggedIn } from '../../reducers/currentUser'
 import history from '../../app/history'
 import Page from '../../components/Page'
@@ -14,6 +15,7 @@ export const Login = ({ location, loggedIn, onLogin }) => {
 
   const onSubmit = async (values) => {
     onLogin(values)
+    await fetchSocket()
     history.push('/')
   }
 
