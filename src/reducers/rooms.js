@@ -7,7 +7,7 @@ export const roomsReducer = (state = initialState, action) => {
         ...state,
         [action.key]: {
           room: action.room,
-          users: action.users
+          users: {}
         }
       }
     case 'UPDATE_ROOM_USERS':
@@ -23,19 +23,7 @@ export const roomsReducer = (state = initialState, action) => {
   }
 }
 
-export const isLoggedIn = (state) => !isEqual(initialState, state.currentUser)
-export const getCurrentUser = (state) => state.currentUser
-export const getCurrentUserId = (state) => parseInt(getCurrentUser(state).id, 10)
-export const tokenHasExpired = (state) => {
-  const expiration = state.currentUser.token_expiration
+export const getRoom = (state, name) => state.rooms[name]
+export const getRoomUsers = (state, name) => state.rooms[name] ? state.rooms[name].users : {}
 
-  if (!expiration) { return false }
-
-  const asInt = parseInt(expiration, 10)
-  const now = Math.floor(Date.now() / 1000)
-
-  return now >= asInt
-}
-
-export default currentUserReducer
-
+export default roomsReducer

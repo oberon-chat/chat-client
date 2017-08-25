@@ -27,7 +27,8 @@ export const fetchSocket = (callback) => (dispatch, getState) => {
     // const token = user.token
     // const connection = new Socket(url, {params: {token: token}})
 
-    const connection = new Socket(socket.url, {user: user.username})
+    const params = { user: user.username }
+    const connection = new Socket(socket.url, { params: params })
 
     connection.onOpen(() => dispatch(socketOpen()))
     connection.onClose(() => dispatch(socketClose()))
