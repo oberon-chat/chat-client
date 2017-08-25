@@ -9,10 +9,13 @@ import Page from './Layout/_Page'
 import './Layout.css'
 
 import Login from './Login'
+import Rooms from './Rooms'
 
 export const Layout = ({ loggedIn }) => {
   const loggedInRoutes = (
-    <Switch />
+    <Switch>
+      <Route path='/rooms' component={Rooms} />
+    </Switch>
   )
 
   const loggedOutRoutes = (
@@ -26,7 +29,9 @@ export const Layout = ({ loggedIn }) => {
       <DraggableBanner />
       <FlashMessages />
       <Header />
-      { loggedIn ? loggedInRoutes : loggedOutRoutes }
+      <div id='content' className='padded'>
+        { loggedIn ? loggedInRoutes : loggedOutRoutes }
+      </div>
     </Page>
   )
 }

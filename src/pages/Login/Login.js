@@ -4,28 +4,27 @@ import { login as loginCurrentUser } from '../../actions/currentUser'
 import { fetchSocket } from '../../actions/socket'
 import { isLoggedIn } from '../../reducers/currentUser'
 import history from '../../app/history'
-import Page from '../../components/Page'
 import Redirect from '../../components/Redirect'
 import LoginForm from './_LoginForm'
 
 export const Login = ({ location, loggedIn, onLogin }) => {
   if (loggedIn) {
-    return <Redirect to={'/'} />
+    return <Redirect to={'/rooms'} />
   }
 
   const onSubmit = async (values) => {
     onLogin(values)
     await fetchSocket()
-    history.push('/')
+    history.push('/rooms')
   }
 
   return (
-    <Page className='center-children window-height'>
+    <div className='center-children'>
       <div className='padded' style={{ backgroundColor: '#fff' }}>
         <h1>Login</h1>
         <LoginForm onSubmit={onSubmit} />
       </div>
-    </Page>
+    </div>
   )
 }
 
