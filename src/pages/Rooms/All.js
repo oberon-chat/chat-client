@@ -6,7 +6,7 @@ export const AllRooms = ({ match }) => (
     <h1>Rooms</h1>
     <ul>
       <li>
-        <Link to={ match.url + '/lobby'}>
+        <Link to={match.url + '/lobby'}>
           Lobby
         </Link>
       </li>

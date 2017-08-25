@@ -37,7 +37,7 @@ export const withSocket = (getState, callback, attempt = 0) => {
 
   setTimeout(() => {
     if (attempt >= max) {
-      throw new Error("Could not retrieve socket connection")
+      throw new Error('Could not retrieve socket connection')
     }
 
     const state = getState()

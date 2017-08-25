@@ -2,17 +2,30 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { joinRoom } from '../../actions/rooms'
 import { getRoom } from '../../reducers/rooms'
+import RoomMessages from './_Messages'
+import RoomUsers from './_Users'
+import { Col, Row } from 'antd'
 
 export class OneRoom extends Component {
-  componentDidMount() {
+  componentDidMount () {
     this.props.onJoin()
   }
 
-  render() {
+  render () {
     const { match } = this.props
 
     return (
-      <span>room {match.params.id}</span>
+      <div style={{ width: '100%' }}>
+        <h1>room {match.params.id}</h1>
+        <Row>
+          <Col span={16}>
+            <RoomMessages room={match.params.id} />
+          </Col>
+          <Col span={8}>
+            <RoomUsers room={match.params.id} />
+          </Col>
+        </Row>
+      </div>
     )
   }
 }

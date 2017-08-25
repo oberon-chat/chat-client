@@ -1,18 +1,18 @@
-import { Socket } from "phoenix"
-import { getSocket } from "../reducers/socket"
-import { getCurrentUser } from "../reducers/currentUser"
+import { Socket } from 'phoenix'
+import { getSocket } from '../reducers/socket'
+import { getCurrentUser } from '../reducers/currentUser'
 
 export const socketOpen = () => ({
-  type: "SOCKET_OPEN"
+  type: 'SOCKET_OPEN'
 })
 
 export const socketClose = () => ({
-  type: "SOCKET_CLOSE"
+  type: 'SOCKET_CLOSE'
 })
 
 export const socketError = (message) => ({
-  type: "SOCKET_ERROR",
-  key: "socket",
+  type: 'SOCKET_ERROR',
+  key: 'socket',
   error: {reason: message}
 })
 
@@ -35,7 +35,7 @@ export const fetchSocket = (callback) => (dispatch, getState) => {
     connection.onError((message) => dispatch(socketError(message)))
     connection.connect()
 
-    dispatch({type: "SOCKET_NEW", connection})
+    dispatch({type: 'SOCKET_NEW', connection})
   }
 
   if (callback) {

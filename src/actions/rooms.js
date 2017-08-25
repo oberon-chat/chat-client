@@ -1,11 +1,17 @@
-import { Presence } from "phoenix"
-import { getRoomUsers } from "../reducers/rooms"
-import { getSocketConnection } from "../reducers/socket"
+import { Presence } from 'phoenix'
+import { getRoomUsers } from '../reducers/rooms'
+import { getSocketConnection } from '../reducers/socket'
 
-const updateRoomUsers = (name, users) => ({
+const updateRoomUsers = (room, users) => ({
   type: 'UPDATE_ROOM_USERS',
-  key: name,
+  key: room,
   users: users
+})
+
+const createMessage = (room, message) => ({
+  type: 'CREATE_ROOM_MESSAGE',
+  key: room,
+  message: message
 })
 
 export const joinRoom = (name) => (dispatch, getState) => {
@@ -26,12 +32,16 @@ export const joinRoom = (name) => (dispatch, getState) => {
     dispatch(updateRoomUsers(name, users))
   })
 
+  room.on('message:new', (data) => (
+    dispatch(createMessage(name, data))
+  ))
+
   room.join()
     // .receive("ok", resp => { console.log("Joined successfully", resp) })
     // .receive("error", resp => { console.log("Unable to join", resp) })
 
   dispatch({
-    type: "JOIN_ROOM",
+    type: 'JOIN_ROOM',
     key: name,
     room: room
   })

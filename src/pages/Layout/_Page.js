@@ -5,13 +5,13 @@ import { isLoggedIn } from '../../reducers/currentUser'
 import { Layout } from 'antd'
 
 class Page extends Component {
-  componentWillMount(one, two) {
+  componentWillMount (one, two) {
     if (this.props.loggedIn) {
       this.props.withLogin()
     }
   }
 
-  render() {
+  render () {
     const { children } = this.props
 
     return (

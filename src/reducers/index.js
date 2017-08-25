@@ -5,6 +5,7 @@ import apolloClient from '../app/apolloClient'
 import currentUserReducer from './currentUser'
 import flashMessagesReducer from './flashMessages'
 import roomsReducer from './rooms'
+import roomMessagesReducer from './roomMessages'
 import socketReducer from './socket'
 
 export default combineReducers({
@@ -12,6 +13,7 @@ export default combineReducers({
   currentUser: currentUserReducer,
   flashMessages: flashMessagesReducer,
   form: reduxFormReducer,
+  roomMessages: roomMessagesReducer,
   rooms: roomsReducer,
   routing: routerReducer,
   socket: socketReducer
