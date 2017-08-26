@@ -11,6 +11,10 @@ const socketReducer = (state = initialState, action) => {
     case `SOCKET_OPEN`:
       return {...state, connected: true}
     case `SOCKET_CLOSE`:
+      if (state.connection) {
+        state.connection.disconnect()
+      }
+
       return {...state, connected: false}
     case `FETCH_TOKEN_SUCCESS`: {
       if (state.connection) {
