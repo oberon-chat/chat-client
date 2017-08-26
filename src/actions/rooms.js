@@ -1,16 +1,16 @@
 import { Presence } from 'phoenix'
-import { getRoomUsers } from '../reducers/rooms'
+import { getRoomInstance, getRoomUsers } from '../reducers/rooms'
 import { getSocketConnection } from '../reducers/socket'
 
-const updateRoomUsers = (room, users) => ({
+const updateRoomUsers = (roomName, users) => ({
   type: 'UPDATE_ROOM_USERS',
-  key: room,
+  key: roomName,
   users: users
 })
 
-const createMessage = (room, message) => ({
-  type: 'CREATE_ROOM_MESSAGE',
-  key: room,
+const updateMessages = (roomName, message) => ({
+  type: 'UPDATE_ROOM_MESSAGES',
+  key: roomName,
   message: message
 })
 
@@ -33,7 +33,7 @@ export const joinRoom = (name) => (dispatch, getState) => {
   })
 
   room.on('message:new', (data) => (
-    dispatch(createMessage(name, data))
+    dispatch(updateMessages(name, data))
   ))
 
   room.join()
@@ -45,4 +45,10 @@ export const joinRoom = (name) => (dispatch, getState) => {
     key: name,
     room: room
   })
+}
+
+export const createMessage = (roomName, message) => (dispatch, getState) => {
+  const room = getRoomInstance(getState(), roomName)
+
+  room.push('message:new', message)
 }

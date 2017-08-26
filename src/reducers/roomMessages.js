@@ -2,7 +2,7 @@ const initialState = {}
 
 export const roomMessagesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'CREATE_ROOM_MESSAGE':
+    case 'UPDATE_ROOM_MESSAGES':
       const messages = (state[action.key] || []).concat(action.message)
 
       return {

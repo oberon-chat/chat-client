@@ -24,6 +24,7 @@ export const roomsReducer = (state = initialState, action) => {
 }
 
 export const getRoom = (state, name) => state.rooms[name]
+export const getRoomInstance = (state, name) => state.rooms[name] ? state.rooms[name].room : {}
 export const getRoomUsers = (state, name) => state.rooms[name] ? state.rooms[name].users : {}
 
 export default roomsReducer

@@ -10,7 +10,7 @@ const UsernameInput = (props) => (
   />
 )
 
-export const NotesForm = ({handleSubmit, pristine, submitting}) => (
+export const NotesForm = ({ handleSubmit, pristine, submitting }) => (
   <Form onSubmit={handleSubmit}>
     <Form.Item>
       <label htmlFor='username'>Username</label>

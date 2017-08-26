@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { joinRoom } from '../../actions/rooms'
 import { getRoom } from '../../reducers/rooms'
-import RoomMessages from './_Messages'
+import MessagesList from '../RoomMessages/_List'
+import MessageForm from '../RoomMessages/_Form'
 import RoomUsers from './_Users'
 import { Col, Row } from 'antd'
 
@@ -19,7 +20,8 @@ export class OneRoom extends Component {
         <h1>room {match.params.id}</h1>
         <Row>
           <Col span={16}>
-            <RoomMessages room={match.params.id} />
+            <MessagesList room={match.params.id} />
+            <MessageForm room={match.params.id} />
           </Col>
           <Col span={8}>
             <RoomUsers room={match.params.id} />

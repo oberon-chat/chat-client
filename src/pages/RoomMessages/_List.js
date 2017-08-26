@@ -4,7 +4,7 @@ import { map } from 'lodash'
 import { getRoomMessages } from '../../reducers/roomMessages'
 import { Card } from 'antd'
 
-export const RoomMessages = ({ messages }) => (
+export const MessageList = ({ messages }) => (
   <div>
     { map(messages, (message) => (
       <Card key={message.timestamp} style={{ marginTop: '15px' }}>
@@ -18,10 +18,10 @@ export const RoomMessages = ({ messages }) => (
   </div>
 )
 
-RoomMessages.displayName = 'RoomMessages'
+MessageList.displayName = 'RoomMessageList'
 
 const mapStateToProps = (state, { room }) => ({
   messages: getRoomMessages(state, room)
 })
 
-export default connect(mapStateToProps)(RoomMessages)
+export default connect(mapStateToProps)(MessageList)
