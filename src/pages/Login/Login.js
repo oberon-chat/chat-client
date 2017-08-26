@@ -14,7 +14,6 @@ export const Login = ({ location, loggedIn, onLogin }) => {
 
   const onSubmit = async (values) => {
     onLogin(values)
-    await fetchSocket()
     history.push('/rooms')
   }
 
@@ -33,7 +32,10 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  onLogin: (data) => dispatch(loginCurrentUser(data))
+  onLogin: (data) => {
+    dispatch(loginCurrentUser(data))
+    dispatch(fetchSocket())
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

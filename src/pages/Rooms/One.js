@@ -17,7 +17,7 @@ export class OneRoom extends Component {
 
     return (
       <div style={{ width: '100%' }}>
-        <h1>room {match.params.id}</h1>
+        <h1>Room {match.params.id}</h1>
         <Row>
           <Col span={16}>
             <MessagesList room={match.params.id} />
