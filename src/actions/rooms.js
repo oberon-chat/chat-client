@@ -1,5 +1,6 @@
 import { Presence } from 'phoenix'
-import { receiveMessage } from './roomMessages'
+import { reverse } from 'lodash'
+import { receiveMessage, replaceMessages } from './roomMessages'
 import { getRoomUsers } from '../reducers/rooms'
 import { withSocketConnection } from '../reducers/socket'
 
@@ -9,26 +10,32 @@ const updateRoomUsers = (roomName, users) => ({
   users: users
 })
 
-export const joinRoom = (name) => (dispatch, getState) => {
+export const joinRoom = (roomName) => (dispatch, getState) => {
   withSocketConnection(getState, (connection) => {
-    const room = connection.channel('room:' + name, {})
+    const room = connection.channel('room:' + roomName, {})
 
     room.on('presence_state', (data) => {
-      const current = getRoomUsers(getState(), name)
+      const current = getRoomUsers(getState(), roomName)
       const users = Presence.syncState(current, data)
 
-      dispatch(updateRoomUsers(name, users))
+      dispatch(updateRoomUsers(roomName, users))
     })
 
     room.on('presence_diff', (data) => {
-      const current = getRoomUsers(getState(), name)
+      const current = getRoomUsers(getState(), roomName)
       const users = Presence.syncDiff(current, data)
 
-      dispatch(updateRoomUsers(name, users))
+      dispatch(updateRoomUsers(roomName, users))
+    })
+
+    room.on('message_state', (data) => {
+      const messages = (data || {}).messages
+
+      dispatch(replaceMessages(roomName, reverse(messages)))
     })
 
     room.on('message:new', (data) => (
-      dispatch(receiveMessage(name, data))
+      dispatch(receiveMessage(roomName, data))
     ))
 
     return room.join()
@@ -36,7 +43,7 @@ export const joinRoom = (name) => (dispatch, getState) => {
       .receive('ok', () => {
         dispatch({
           type: 'JOIN_ROOM',
-          key: name,
+          key: roomName,
           room: room
         })
       })

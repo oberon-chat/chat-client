@@ -9,7 +9,6 @@ export const roomMessagesReducer = (state = initialState, action) => {
         ...state,
         [action.key]: messages
       }
-
     case 'REPLACE_ROOM_MESSAGES':
       return {
         ...state,
