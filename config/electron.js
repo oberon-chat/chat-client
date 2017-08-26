@@ -27,7 +27,7 @@ function createWindow () {
   let startUrl
 
   if (process.env.NODE_ENV == 'development') {
-    startUrl = 'http://localhost:3000'
+    startUrl = 'http://chat.dev'
   } else {
 	  startUrl = url.format({
       pathname: path.join(__dirname, '../build/index.html'),
