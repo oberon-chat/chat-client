@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Field, reduxForm, reset as resetForm } from 'redux-form'
-import { createMessage } from '../../actions/rooms'
+import { submitMessage } from '../../actions/roomMessages'
 import { Button, Form, Icon, Input } from 'antd'
 
 const MessageInput = (props) => (
@@ -50,7 +50,7 @@ const mapStateToProps = (state, { room }) => ({
 
 const mapDispatchToProps = (dispatch, { room }) => ({
   onSubmit: (data) => {
-    dispatch(createMessage(room, data.message))
+    dispatch(submitMessage(room, data.message))
     dispatch(resetForm(room + 'MessageForm'))
   }
 })
