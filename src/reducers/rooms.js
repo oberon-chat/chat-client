@@ -5,18 +5,7 @@ export const roomsReducer = (state = initialState, action) => {
     case 'JOIN_ROOM':
       return {
         ...state,
-        [action.key]: {
-          room: action.room,
-          users: {}
-        }
-      }
-    case 'UPDATE_ROOM_USERS':
-      return {
-        ...state,
-        [action.key]: {
-          ...state[action.key],
-          users: action.users
-        }
+        [action.key]: action.room
       }
     default:
       return state
@@ -24,7 +13,5 @@ export const roomsReducer = (state = initialState, action) => {
 }
 
 export const getRoom = (state, name) => state.rooms[name]
-export const getRoomInstance = (state, name) => state.rooms[name] ? state.rooms[name].room : {}
-export const getRoomUsers = (state, name) => state.rooms[name] ? state.rooms[name].users : {}
 
 export default roomsReducer

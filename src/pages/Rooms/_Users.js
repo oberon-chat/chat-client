@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { map } from 'lodash'
-import { getRoomUsers } from '../../reducers/rooms'
+import { getRoomUsers } from '../../reducers/roomUsers'
 import StatusDot from '../../components/StatusDot'
 
 export const RoomUsers = ({ users }) => (

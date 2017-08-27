@@ -1,14 +1,9 @@
 import { Presence } from 'phoenix'
 import { reverse } from 'lodash'
 import { receiveMessage, replaceMessages } from './roomMessages'
-import { getRoomUsers } from '../reducers/rooms'
+import { updateRoomUsers } from './roomUsers'
+import { getRoomUsers } from '../reducers/roomUsers'
 import { withSocketConnection } from '../reducers/socket'
-
-const updateRoomUsers = (roomName, users) => ({
-  type: 'UPDATE_ROOM_USERS',
-  key: roomName,
-  users: users
-})
 
 export const joinRoom = (roomName) => (dispatch, getState) => {
   withSocketConnection(getState, (connection) => {

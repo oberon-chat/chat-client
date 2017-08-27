@@ -1,4 +1,4 @@
-import { getRoomInstance } from '../reducers/rooms'
+import { getRoom } from '../reducers/rooms'
 
 export const receiveMessage = (roomName, message) => ({
   type: 'RECEIVE_ROOM_MESSAGE',
@@ -13,7 +13,7 @@ export const replaceMessages = (roomName, messages) => ({
 })
 
 export const submitMessage = (roomName, message) => (dispatch, getState) => {
-  const room = getRoomInstance(getState(), roomName)
+  const room = getRoom(getState(), roomName)
 
   room.push('message:new', message)
 }
