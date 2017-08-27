@@ -2,16 +2,13 @@ const initialState = {}
 
 export const roomsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'JOIN_ROOM':
-      return {
-        ...state,
-        [action.key]: action.room
-      }
+    case 'UPDATE_ROOMS':
+      return action.rooms
     default:
       return state
   }
 }
 
-export const getRoom = (state, name) => state.rooms[name]
+export const getRooms = (state) => state.rooms
 
 export default roomsReducer

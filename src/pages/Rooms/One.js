@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { joinRoom } from '../../actions/rooms'
-import { getRoom } from '../../reducers/rooms'
+import { getRoom } from '../../reducers/roomsJoined'
 import MessagesList from '../RoomMessages/_List'
 import MessageForm from '../RoomMessages/_Form'
 import RoomUsers from './_Users'
@@ -17,6 +18,7 @@ export class OneRoom extends Component {
 
     return (
       <div style={{ width: '100%' }}>
+        <Link to='/rooms'>All Rooms</Link>
         <h1>Room {match.params.id}</h1>
         <Row>
           <Col span={16}>

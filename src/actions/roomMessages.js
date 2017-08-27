@@ -1,4 +1,4 @@
-import { getRoom } from '../reducers/rooms'
+import { getRoom } from '../reducers/roomsJoined'
 
 export const receiveMessage = (roomName, message) => ({
   type: 'RECEIVE_ROOM_MESSAGE',
