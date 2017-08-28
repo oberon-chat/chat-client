@@ -6,6 +6,11 @@ import { getRooms } from '../reducers/rooms'
 import { getRoomUsers } from '../reducers/roomUsers'
 import { withSocketConnection } from '../reducers/socket'
 
+export const createRoom = (room) => ({
+  type: 'CREATE_ROOM',
+  room: room
+})
+
 const updateRooms = (rooms) => ({
   type: 'UPDATE_ROOMS',
   rooms: rooms

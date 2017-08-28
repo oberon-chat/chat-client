@@ -5,6 +5,7 @@ import { map } from 'lodash'
 import { joinRooms } from '../../actions/rooms'
 import { getRooms } from '../../reducers/rooms'
 import { getRoomsJoined } from '../../reducers/roomsJoined'
+import CreateRoomForm from './_Form'
 
 export class AllRooms extends Component {
   componentDidMount () {
@@ -26,6 +27,8 @@ export class AllRooms extends Component {
             </li>
           )) }
         </ul>
+        <h3>Create Room</h3>
+        <CreateRoomForm />
       </div>
     )
   }
