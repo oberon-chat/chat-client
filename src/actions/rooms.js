@@ -20,14 +20,14 @@ export const joinRooms = () => (dispatch, getState) => {
   withSocketConnection(getState, (connection) => {
     const rooms = connection.channel('rooms', {})
 
-    rooms.on('room_state', (data) => {
+    rooms.on('presence_state', (data) => {
       const current = getRooms(getState())
       const updated = Presence.syncState(current, data)
 
       dispatch(updateRooms(updated))
     })
 
-    rooms.on('room_diff', (data) => {
+    rooms.on('presence_diff', (data) => {
       const current = getRooms(getState())
       const updated = Presence.syncDiff(current, data)
 
