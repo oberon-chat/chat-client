@@ -34,7 +34,7 @@ export const roomsJoinedReducer = (state = initialState, action) => {
   }
 }
 
-export const getRoom = (state, name) => state.roomsJoined[name] || {}
+export const getRoom = (state, name) => (state.roomsJoined[name] || {}).room || {}
 export const getRoomsJoined = (state) => state.roomsJoined
 
 export default roomsJoinedReducer

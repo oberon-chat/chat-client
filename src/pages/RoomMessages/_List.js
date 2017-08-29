@@ -2,17 +2,18 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { map } from 'lodash'
 import { getRoomMessages } from '../../reducers/roomMessages'
+import Markdown from '../../components/Markdown'
 import { Card } from 'antd'
 
 export const MessageList = ({ messages }) => (
   <div>
     { map(messages, (message) => (
-      <Card key={message.timestamp} style={{ marginTop: '15px' }}>
+      <Card key={message.id} style={{ marginTop: '15px' }}>
         <strong>{message.user}</strong>
         {' '}
         {new Date(message.timestamp).toLocaleTimeString()}
         <br />
-        {message.body}
+        <Markdown value={message.body} />
       </Card>
     ))}
   </div>

@@ -5,15 +5,29 @@ import { Field, reduxForm, reset as resetForm } from 'redux-form'
 import { submitMessage } from '../../actions/roomMessages'
 import { Button, Form, Icon, Input } from 'antd'
 
-const MessageInput = (props) => (
-  <Input
-    placeholder={'Send message to ' + props.room}
-    {...props.input}
-  />
-)
+const MessageInput = (props) => {
+  const maxRows = 4
+  const lines = props.input.value.split('\n').length
+  const rows = lines > maxRows ? maxRows : lines
 
-export const MessageForm = ({ handleSubmit, pristine, room, submitting }) => {
-  const fieldProps = { room: room }
+  return (
+    <Input.TextArea
+      placeholder={'Send message to ' + props.room}
+      onKeyDown={props.submitOnEnter}
+      rows={rows}
+      {...props.input}
+    />
+  )
+}
+
+export const MessageForm = ({ handleSubmit, pristine, room, submitting, values }) => {
+  const submitOnEnter = (event) => {
+    if (event.keyCode === 13 && event.shiftKey === false) {
+      handleSubmit(values)
+      event.preventDefault()
+    }
+  }
+  const fieldProps = { room: room, submitOnEnter: submitOnEnter }
 
   return (
     <Form layout='inline' onSubmit={handleSubmit}>
