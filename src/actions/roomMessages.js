@@ -19,6 +19,12 @@ export const replaceMessages = (roomName, messages) => ({
   messages: messages
 })
 
+export const removeMessage = (roomName, message) => ({
+  type: 'REMOVE_ROOM_MESSAGE',
+  key: roomName,
+  message: message
+})
+
 export const submitMessage = (roomName, message) => (dispatch, getState) => {
   const room = getRoom(getState(), roomName)
 
@@ -35,4 +41,12 @@ export const editMessage = (roomName, messageId, body) => (dispatch, getState) =
   }
 
   room.push('message:update', updatedMessage)
+}
+
+export const deleteMessage = (roomName, messageId) => (dispatch, getState) => {
+  const state = getState()
+  const room = getRoom(state, roomName)
+  const message = getRoomMessage(state, roomName, messageId)
+
+  room.push('message:delete', message)
 }

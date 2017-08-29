@@ -57,3 +57,11 @@ hr {
   margin-top: 64px;
   width: 100%;
 }
+
+/* Content */
+
+.message {
+  background: #fff;
+  margin-top: 15px;
+  padding: 20px 20px;
+}

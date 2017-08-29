@@ -1,4 +1,4 @@
-import { find, map } from 'lodash'
+import { find, map, reduce } from 'lodash'
 
 const initialState = {}
 
@@ -24,6 +24,15 @@ export const roomMessagesReducer = (state = initialState, action) => {
       return {
         ...state,
         [action.key]: updated
+      }
+    case 'REMOVE_ROOM_MESSAGE':
+      const removed = reduce(state[action.key], (acc, message) => (
+        message.id === action.message.id ? acc : acc.concat(message)
+      ), [])
+
+      return {
+        ...state,
+        [action.key]: removed
       }
     default:
       return state

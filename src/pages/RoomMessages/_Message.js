@@ -1,32 +1,23 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import Markdown from '../../components/Markdown'
-import { editMessagePath } from '../../helpers/paths'
-import { Card } from 'antd'
+import MessageActions from './_MessageActions'
 
-const Message = ({ message, props }) => {
-  const { id, body, timestamp, user } = message
-  const { currentUser, room } = props
-
-  const EditButton = () => {
-    if (currentUser.username !== user) { return null }
-
-    return (
-      <Link to={editMessagePath(room, id)}>
-        Edit
-      </Link>
-    )
-  }
+const Message = ({ currentUser, message, onDelete, room }) => {
+  const { body, timestamp, user } = message
 
   return (
-    <Card style={{ marginTop: '15px' }}>
+    <div className='message'>
       <strong>{user}</strong>
       {' '}
       {new Date(timestamp).toLocaleTimeString()}
       <br />
       <Markdown value={body} />
-      <EditButton />
-    </Card>
+      <MessageActions
+        currentUser={currentUser}
+        message={message}
+        room={room}
+      />
+    </div>
   )
 }
 

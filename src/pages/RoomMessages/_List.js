@@ -5,10 +5,15 @@ import { getCurrentUser } from '../../reducers/currentUser'
 import { getRoomMessages } from '../../reducers/roomMessages'
 import RoomMessage from './_Message'
 
-export const MessageList = (props) => (
+export const MessageList = ({ currentUser, messages, room }) => (
   <div>
-    { map(props.messages, (message) => (
-      <RoomMessage key={message.id} message={message} props={props} />
+    { map(messages, (message) => (
+      <RoomMessage
+        key={message.id}
+        message={message}
+        currentUser={currentUser}
+        room={room}
+      />
     ))}
   </div>
 )

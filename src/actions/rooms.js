@@ -1,6 +1,6 @@
 import { Presence } from 'phoenix'
 import { reverse } from 'lodash'
-import { receiveMessage, replaceMessage, replaceMessages } from './roomMessages'
+import { receiveMessage, removeMessage, replaceMessage, replaceMessages } from './roomMessages'
 import { updateRoomUsers } from './roomUsers'
 import { getRooms } from '../reducers/rooms'
 import { getRoomUsers } from '../reducers/roomUsers'
@@ -80,6 +80,10 @@ export const joinRoom = (roomName) => (dispatch, getState) => {
 
     room.on('message:update', (data) => (
       dispatch(replaceMessage(roomName, data))
+    ))
+
+    room.on('message:delete', (data) => (
+      dispatch(removeMessage(roomName, data))
     ))
 
     return room.join()
