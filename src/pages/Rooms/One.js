@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { joinRoom, viewRoom } from '../../actions/rooms'
 import { getRoom } from '../../reducers/roomsJoined'
 import MessagesList from '../RoomMessages/_List'
-import MessageForm from '../RoomMessages/_Form'
+import NewMessage from '../RoomMessages/_New'
 import RoomUsers from './_Users'
 import { Col, Row } from 'antd'
 
@@ -23,7 +23,7 @@ export class OneRoom extends Component {
         <Row>
           <Col span={16}>
             <MessagesList room={match.params.id} />
-            <MessageForm room={match.params.id} />
+            <NewMessage room={match.params.id} />
           </Col>
           <Col span={8}>
             <RoomUsers room={match.params.id} />

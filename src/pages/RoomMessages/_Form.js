@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { Field, reduxForm, reset as resetForm } from 'redux-form'
-import { submitMessage } from '../../actions/roomMessages'
+import { Field, reduxForm } from 'redux-form'
 import { Button, Form, Icon, Input } from 'antd'
 
 const MessageInput = (props) => {
@@ -49,24 +47,9 @@ export const MessageForm = ({ handleSubmit, pristine, room, submitting, values }
 MessageForm.displayName = 'MessageForm'
 
 MessageForm.propTypes = {
-  // Required passed props
-  room: PropTypes.string.isRequired,
-  // Required generated props
-  form: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired
+  form: PropTypes.string.isRequired, // Id of Redux Form instance
+  onSubmit: PropTypes.func.isRequired,
+  room: PropTypes.string.isRequired
 }
 
-const ReduxForm = reduxForm()(MessageForm)
-
-const mapStateToProps = (state, { room }) => ({
-  form: room + 'MessageForm'
-})
-
-const mapDispatchToProps = (dispatch, { room }) => ({
-  onSubmit: (data) => {
-    dispatch(submitMessage(room, data.message))
-    dispatch(resetForm(room + 'MessageForm'))
-  }
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ReduxForm)
+export default reduxForm()(MessageForm)
