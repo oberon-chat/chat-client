@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { joinRoom } from '../../actions/rooms'
+import { joinRoom, viewRoom } from '../../actions/rooms'
 import { getRoom } from '../../reducers/roomsJoined'
 import MessagesList from '../RoomMessages/_List'
 import MessageForm from '../RoomMessages/_Form'
@@ -39,7 +39,10 @@ const mapStateToProps = (state, { match }) => ({
 })
 
 const mapDispatchToProps = (dispatch, { match }) => ({
-  onJoin: () => dispatch(joinRoom(match.params.id))
+  onJoin: () => {
+    dispatch(joinRoom(match.params.id))
+    dispatch(viewRoom(match.params.id))
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(OneRoom)

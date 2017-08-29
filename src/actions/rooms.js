@@ -11,6 +11,11 @@ export const createRoom = (room) => ({
   room: room
 })
 
+export const viewRoom = (room) => ({
+  type: 'VIEW_ROOM',
+  room: room
+})
+
 const updateRooms = (rooms) => ({
   type: 'UPDATE_ROOMS',
   rooms: rooms

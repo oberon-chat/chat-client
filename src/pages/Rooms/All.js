@@ -19,7 +19,7 @@ export class AllRooms extends Component {
     const { match, rooms, roomsJoined } = this.props
 
     const renderRoom = (room, name) => {
-      const lastMessage = meta(room, "last_message")
+      const lastMessage = meta(room, 'last_message')
       const timestamp = lastMessage ? moment(lastMessage.timestamp).calendar() : null
 
       return (
