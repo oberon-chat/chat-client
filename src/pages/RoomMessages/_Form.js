@@ -47,9 +47,9 @@ export const MessageForm = ({ handleSubmit, pristine, room, submitting, values }
 MessageForm.displayName = 'MessageForm'
 
 MessageForm.propTypes = {
-  form: PropTypes.string.isRequired, // Id of Redux Form instance
+  form: PropTypes.string.isRequired, // Redux Form id
   onSubmit: PropTypes.func.isRequired,
   room: PropTypes.string.isRequired
 }
 
-export default reduxForm()(MessageForm)
+export default reduxForm({ enableReinitialize: true })(MessageForm)

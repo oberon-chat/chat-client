@@ -10,14 +10,15 @@ export const NewMessage = ({ form, onSubmit, room }) => (
 
 NewMessage.displayName = 'NewMessage'
 
-const mapStateToProps = (state, { room }) => ({
-  form: room + 'NewMessageForm'
+const mapStateToProps = (state, { match }) => ({
+  form: match.params.room + 'NewMessageForm',
+  room: match.params.room
 })
 
-const mapDispatchToProps = (dispatch, { room }) => ({
+const mapDispatchToProps = (dispatch, { match }) => ({
   onSubmit: (data) => {
-    dispatch(submitMessage(room, data.message))
-    dispatch(resetForm(room + 'NewMessageForm'))
+    dispatch(submitMessage(match.params.room, data.message))
+    dispatch(resetForm(match.params.room + 'NewMessageForm'))
   }
 })
 
