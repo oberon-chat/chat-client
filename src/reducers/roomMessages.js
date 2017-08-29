@@ -18,7 +18,7 @@ export const roomMessagesReducer = (state = initialState, action) => {
       }
     case 'REPLACE_ROOM_MESSAGE':
       const updated = map(state[action.key], (message) => (
-        message.id == action.message.id ? action.message : message
+        message.id === action.message.id ? action.message : message
       ))
 
       return {
