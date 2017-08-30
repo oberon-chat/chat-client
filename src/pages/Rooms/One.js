@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, Route, Switch } from 'react-router-dom'
+import history from '../../app/history'
 import { joinRoom, viewRoom } from '../../actions/rooms'
+import notification from '../../helpers/notification'
 import MessagesList from '../RoomMessages/_List'
 import EditMessage from '../RoomMessages/_Edit'
 import NewMessage from '../RoomMessages/_New'
@@ -44,8 +46,16 @@ const mapStateToProps = (state, { match }) => ({
 
 const mapDispatchToProps = (dispatch, { match }) => ({
   onJoin: () => {
-    dispatch(joinRoom(match.params.id))
-    dispatch(viewRoom(match.params.id))
+    const onSuccess = () => {
+      dispatch(viewRoom(match.params.id))
+    }
+
+    const onError = () => {
+      notification('Error joining room ' + match.params.id, 'error')
+      history.push('/rooms')
+    }
+
+    dispatch(joinRoom(match.params.id, onSuccess, onError))
   }
 })
 

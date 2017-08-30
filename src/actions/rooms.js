@@ -51,7 +51,7 @@ export const joinRooms = () => (dispatch, getState) => {
   })
 }
 
-export const joinRoom = (roomName) => (dispatch, getState) => {
+export const joinRoom = (roomName, onSuccess, onError) => (dispatch, getState) => {
   withSocketConnection(getState, (connection) => {
     const room = connection.channel('room:' + roomName, {})
 
@@ -87,14 +87,22 @@ export const joinRoom = (roomName) => (dispatch, getState) => {
       dispatch(removeMessage(roomName, data))
     ))
 
-    return room.join()
-      .receive('error', resp => { console.log('Unable to join', resp) })
-      .receive('ok', () => {
-        dispatch({
-          type: 'JOIN_ROOM',
-          key: roomName,
-          channel: room
-        })
+    const onJoinSuccess = () => {
+      if (onSuccess) { onSuccess() }
+
+      dispatch({
+        type: 'JOIN_ROOM',
+        key: roomName,
+        channel: room
       })
+    }
+
+    const onJoinError = (error) => {
+      if (onError) { onError(error) }
+    }
+
+    return room.join()
+      .receive('ok', onJoinSuccess)
+      .receive('error', onJoinError)
   })
 }
