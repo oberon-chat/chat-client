@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Field, reduxForm, reset as resetForm } from 'redux-form'
 import history from '../../app/history'
 import { createRoom } from '../../actions/rooms'
+import notification from '../../helpers/notification'
 import { Button, Form, Icon, Input } from 'antd'
 
 const RoomInput = (props) => (
@@ -36,11 +37,15 @@ const mapStateToProps = (state) => ({
   form: 'createRoomForm'
 })
 
-const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (data) => {
-    dispatch(createRoom(data.room))
-    dispatch(resetForm('createRoomForm'))
-    history.push('/rooms/' + data.room)
+const mapDispatchToProps = (dispatch, { room }) => ({
+  onSubmit: async (data) => {
+    try {
+      await dispatch(createRoom(data.room))
+      dispatch(resetForm('createRoomForm'))
+      history.push('/rooms/' + data.room)
+    } catch (_error) {
+      notification('Error creating room ' + room, 'error')
+    }
   }
 })
 

@@ -9,7 +9,7 @@ export const roomsJoinedReducer = (state = initialState, action) => {
         ...state,
         [action.key]: {
           ...state[action.key],
-          room: action.room
+          channel: action.channel
         }
       }
     case 'VIEW_ROOM':
@@ -34,7 +34,8 @@ export const roomsJoinedReducer = (state = initialState, action) => {
   }
 }
 
-export const getRoom = (state, name) => (state.roomsJoined[name] || {}).room || {}
-export const getRoomsJoined = (state) => state.roomsJoined
+export const getRoomsJoined = (state) => state.roomsJoined || {}
+export const getRoom = (state, name) => getRoomsJoined(state)[name] || {}
+export const getRoomChannel = (state, name) => getRoom(state, name).channel || {}
 
 export default roomsJoinedReducer

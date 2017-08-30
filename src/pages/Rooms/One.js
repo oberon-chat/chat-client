@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, Route, Switch } from 'react-router-dom'
 import { joinRoom, viewRoom } from '../../actions/rooms'
-import { getRoom } from '../../reducers/roomsJoined'
 import MessagesList from '../RoomMessages/_List'
 import EditMessage from '../RoomMessages/_Edit'
 import NewMessage from '../RoomMessages/_New'
@@ -40,7 +39,7 @@ export class OneRoom extends Component {
 }
 
 const mapStateToProps = (state, { match }) => ({
-  room: getRoom(state, match.params.id)
+
 })
 
 const mapDispatchToProps = (dispatch, { match }) => ({

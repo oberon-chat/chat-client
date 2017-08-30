@@ -1,4 +1,4 @@
-import { getRoom } from '../reducers/roomsJoined'
+import { getRoomChannel } from '../reducers/roomsJoined'
 import { getRoomMessage } from '../reducers/roomMessages'
 
 export const receiveMessage = (roomName, message) => ({
@@ -26,27 +26,27 @@ export const removeMessage = (roomName, message) => ({
 })
 
 export const submitMessage = (roomName, message) => (dispatch, getState) => {
-  const room = getRoom(getState(), roomName)
+  const room = getRoomChannel(getState(), roomName)
 
-  room.push('message:new', message)
+  return room.push('message:new', message)
 }
 
 export const editMessage = (roomName, messageId, body) => (dispatch, getState) => {
   const state = getState()
-  const room = getRoom(state, roomName)
+  const room = getRoomChannel(state, roomName)
   const message = getRoomMessage(state, roomName, messageId)
   const updatedMessage = {
     ...message,
     body: body
   }
 
-  room.push('message:update', updatedMessage)
+  return room.push('message:update', updatedMessage)
 }
 
 export const deleteMessage = (roomName, messageId) => (dispatch, getState) => {
   const state = getState()
-  const room = getRoom(state, roomName)
+  const room = getRoomChannel(state, roomName)
   const message = getRoomMessage(state, roomName, messageId)
 
-  room.push('message:delete', message)
+  return room.push('message:delete', message)
 }

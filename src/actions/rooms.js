@@ -2,18 +2,19 @@ import { Presence } from 'phoenix'
 import { reverse } from 'lodash'
 import { receiveMessage, removeMessage, replaceMessage, replaceMessages } from './roomMessages'
 import { updateRoomUsers } from './roomUsers'
-import { getRooms } from '../reducers/rooms'
+import { getRooms, getRoomsChannel } from '../reducers/rooms'
 import { getRoomUsers } from '../reducers/roomUsers'
 import { withSocketConnection } from '../reducers/socket'
 
-export const createRoom = (room) => ({
-  type: 'CREATE_ROOM',
-  room: room
-})
+export const createRoom = (roomName) => (dispatch, getState) => {
+  const rooms = getRoomsChannel(getState())
 
-export const viewRoom = (room) => ({
+  return rooms.push('rooms:new', roomName)
+}
+
+export const viewRoom = (roomName) => ({
   type: 'VIEW_ROOM',
-  room: room
+  room: roomName
 })
 
 const updateRooms = (rooms) => ({
@@ -44,7 +45,7 @@ export const joinRooms = () => (dispatch, getState) => {
       .receive('ok', () => {
         dispatch({
           type: 'JOIN_ROOMS',
-          rooms: rooms
+          channel: rooms
         })
       })
   })
@@ -92,7 +93,7 @@ export const joinRoom = (roomName) => (dispatch, getState) => {
         dispatch({
           type: 'JOIN_ROOM',
           key: roomName,
-          room: room
+          channel: room
         })
       })
   })
