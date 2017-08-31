@@ -6,7 +6,8 @@ import AllRooms from './All'
 
 export const Rooms = ({ match }) => (
   <Switch>
-    <Route path={match.url + '/:id'} component={OneRoom} />
+    <Route path={match.url + '/:roomId/messages/:messageId/edit'} component={OneRoom} />
+    <Route path={match.url + '/:roomId'} component={OneRoom} />
     <Route component={AllRooms} />
   </Switch>
 )

@@ -1,24 +1,35 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { findDOMNode } from 'react-dom'
 import { connect } from 'react-redux'
 import { reset as resetForm } from 'redux-form'
 import { submitMessage } from '../../actions/roomMessages'
 import MessageForm from './_Form'
 
-export const NewMessage = ({ form, onSubmit, room }) => (
-  <MessageForm form={form} onSubmit={onSubmit} room={room} />
-)
+export class NewMessage extends Component {
+  componentDidMount () {
+    findDOMNode(this)
+      .querySelector('textarea[name="message"]')
+      .focus()
+  }
 
-NewMessage.displayName = 'NewMessage'
+  render () {
+    const { form, onSubmit, room } = this.props
 
-const mapStateToProps = (state, { match }) => ({
-  form: match.params.room + 'NewMessageForm',
-  room: match.params.room
+    return (
+      <MessageForm form={form} onSubmit={onSubmit} room={room} />
+    )
+  }
+}
+
+const mapStateToProps = (state, { room }) => ({
+  form: room + 'NewMessageForm',
+  room: room
 })
 
-const mapDispatchToProps = (dispatch, { match }) => ({
+const mapDispatchToProps = (dispatch, { room }) => ({
   onSubmit: (data) => {
-    dispatch(submitMessage(match.params.room, data.message))
-    dispatch(resetForm(match.params.room + 'NewMessageForm'))
+    dispatch(submitMessage(room, data.message))
+    dispatch(resetForm(room + 'NewMessageForm'))
   }
 })
 

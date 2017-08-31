@@ -30,24 +30,24 @@ export class EditMessage extends Component {
   }
 }
 
-const mapStateToProps = (state, { match }) => {
-  const message = getRoomMessage(state, match.params.room, match.params.message)
+const mapStateToProps = (state, { messageId, room }) => {
+  const message = getRoomMessage(state, room, messageId)
 
   return {
-    form: match.params.room + 'EditMessageForm',
+    form: room + 'EditMessageForm',
     initialValues: {message: message.body},
-    room: match.params.room
+    room: room
   }
 }
 
-const mapDispatchToProps = (dispatch, { match }) => ({
+const mapDispatchToProps = (dispatch, { messageId, room }) => ({
   onCancel: () => {
-    history.push(roomPath(match.params.room))
+    history.push(roomPath(room))
   },
   onSubmit: async (data) => {
-    await dispatch(editMessage(match.params.room, match.params.message, data.message))
-    dispatch(resetForm(match.params.room + 'EditMessageForm'))
-    history.push(roomPath(match.params.room))
+    await dispatch(editMessage(room, messageId, data.message))
+    dispatch(resetForm(room + 'EditMessageForm'))
+    history.push(roomPath(room))
   }
 })
 

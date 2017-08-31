@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link, Route, Switch } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import history from '../../app/history'
 import { joinRoom, viewRoom } from '../../actions/rooms'
 import notification from '../../helpers/notification'
@@ -17,22 +17,22 @@ export class OneRoom extends Component {
 
   render () {
     const { match } = this.props
-    const roomName = match.params.id
+    const { messageId, roomId } = match.params
 
     return (
       <div style={{ width: '100%' }}>
         <Link to='/rooms'>All Rooms</Link>
-        <h1>Room {roomName}</h1>
+        <h1>Room {roomId}</h1>
         <Row>
           <Col span={16}>
-            <MessagesList room={roomName} />
-            <Switch>
-              <Route path={'/rooms/:room/messages/:message/edit'} component={EditMessage} />
-              <Route path={'/rooms/:room'} component={NewMessage} />
-            </Switch>
+            <MessagesList room={roomId} />
+            { messageId
+              ? <EditMessage messageId={messageId} room={roomId} />
+              : <NewMessage room={roomId}/>
+            }
           </Col>
           <Col span={8}>
-            <RoomUsers room={roomName} />
+            <RoomUsers room={roomId} />
           </Col>
         </Row>
       </div>
@@ -46,16 +46,18 @@ const mapStateToProps = (state, { match }) => ({
 
 const mapDispatchToProps = (dispatch, { match }) => ({
   onJoin: () => {
+    const room = match.params.roomId
+
     const onSuccess = () => {
-      dispatch(viewRoom(match.params.id))
+      dispatch(viewRoom(room))
     }
 
     const onError = () => {
-      notification('Error joining room ' + match.params.id, 'error')
+      notification('Error joining room ' + room, 'error')
       history.push('/rooms')
     }
 
-    dispatch(joinRoom(match.params.id, onSuccess, onError))
+    dispatch(joinRoom(room, onSuccess, onError))
   }
 })
 
