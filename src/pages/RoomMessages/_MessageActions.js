@@ -21,7 +21,10 @@ const Actions = ({ currentUser, message, onDelete, room }) => {
         content: body,
         okText: 'Delete',
         onCancel: () => false,
-        onOk: () => onDelete(id),
+        onOk: () => {
+          onDelete(id)
+          return false
+        },
         title: 'Do you want to delete message?'
       })
     }

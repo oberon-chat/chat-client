@@ -18,13 +18,29 @@ const MessageInput = (props) => {
   )
 }
 
-export const MessageForm = ({ handleSubmit, pristine, room, submitting, values }) => {
+const CancelButton = ({ disabled, onCancel }) => {
+  if (!onCancel) {
+    return null
+  }
+
+  return (
+    <Button
+      disabled={disabled}
+      onClick={onCancel}
+    >
+      Cancel
+    </Button>
+  )
+}
+
+export const MessageForm = ({ handleSubmit, onCancel, pristine, room, submitting, values }) => {
   const submitOnEnter = (event) => {
     if (event.keyCode === 13 && event.shiftKey === false) {
       handleSubmit(values)
       event.preventDefault()
     }
   }
+
   const fieldProps = { room: room, submitOnEnter: submitOnEnter }
 
   return (
@@ -40,6 +56,10 @@ export const MessageForm = ({ handleSubmit, pristine, room, submitting, values }
       >
         <Icon type='plus' style={{ fontSize: '13px' }} />
       </Button>
+      <CancelButton
+        onCancel={onCancel}
+        disabled={submitting}
+      />
     </Form>
   )
 }

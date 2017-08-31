@@ -16,12 +16,13 @@ export class EditMessage extends Component {
   }
 
   render () {
-    const { form, initialValues, onSubmit, room } = this.props
+    const { form, initialValues, onCancel, onSubmit, room } = this.props
 
     return (
       <MessageForm
         form={form}
         initialValues={initialValues}
+        onCancel={onCancel}
         onSubmit={onSubmit}
         room={room}
       />
@@ -40,6 +41,9 @@ const mapStateToProps = (state, { match }) => {
 }
 
 const mapDispatchToProps = (dispatch, { match }) => ({
+  onCancel: () => {
+    history.push(roomPath(match.params.room))
+  },
   onSubmit: async (data) => {
     await dispatch(editMessage(match.params.room, match.params.message, data.message))
     dispatch(resetForm(match.params.room + 'EditMessageForm'))
