@@ -1,8 +1,9 @@
 import { Presence } from 'phoenix'
-import { reverse } from 'lodash'
+import { isEmpty, reverse } from 'lodash'
 import { receiveMessage, removeMessage, replaceMessage, replaceMessages } from './roomMessages'
 import { updateRoomUsers } from './roomUsers'
 import { getRooms, getRoomsChannel } from '../reducers/rooms'
+import { getRoomChannel } from '../reducers/roomsJoined'
 import { getRoomUsers } from '../reducers/roomUsers'
 import { withSocketConnection } from '../reducers/socket'
 
@@ -23,6 +24,12 @@ const updateRooms = (rooms) => ({
 })
 
 export const joinRooms = () => (dispatch, getState) => {
+  const rooms = getRoomsChannel(getState())
+
+  if (!isEmpty(rooms)) {
+    return rooms
+  }
+
   withSocketConnection(getState, (connection) => {
     const rooms = connection.channel('rooms', {})
 
@@ -52,6 +59,16 @@ export const joinRooms = () => (dispatch, getState) => {
 }
 
 export const joinRoom = (roomName, onSuccess, onError) => (dispatch, getState) => {
+  const room = getRoomChannel(getState(), roomName)
+
+  if (!isEmpty(room)) {
+    if (onSuccess) {
+      onSuccess()
+    }
+
+    return room
+  }
+
   withSocketConnection(getState, (connection) => {
     const room = connection.channel('room:' + roomName, {})
 
