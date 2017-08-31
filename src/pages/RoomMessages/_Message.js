@@ -2,7 +2,7 @@ import React from 'react'
 import Markdown from '../../components/Markdown'
 import MessageActions from './_MessageActions'
 
-const Message = ({ currentUser, message, onDelete, room }) => {
+const Message = ({ currentUser, editing, message, onDelete, room }) => {
   const { body, timestamp, user } = message
 
   return (
@@ -10,6 +10,7 @@ const Message = ({ currentUser, message, onDelete, room }) => {
       <strong>{user}</strong>
       {' '}
       {new Date(timestamp).toLocaleTimeString()}
+      { editing ? ' (editing)' : ''}
       <br />
       <Markdown value={body} />
       <MessageActions

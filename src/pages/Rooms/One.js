@@ -25,10 +25,10 @@ export class OneRoom extends Component {
         <h1>Room {roomId}</h1>
         <Row>
           <Col span={16}>
-            <MessagesList room={roomId} />
+            <MessagesList editingMessageId={messageId} room={roomId} />
             { messageId
               ? <EditMessage messageId={messageId} room={roomId} />
-              : <NewMessage room={roomId}/>
+              : <NewMessage room={roomId} />
             }
           </Col>
           <Col span={8}>

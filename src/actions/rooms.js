@@ -26,7 +26,7 @@ const updateRooms = (rooms) => ({
 export const joinRooms = () => (dispatch, getState) => {
   const rooms = getRoomsChannel(getState())
 
-  if (rooms.state === "joined") {
+  if (rooms.state === 'joined') {
     return rooms
   }
 
@@ -61,7 +61,7 @@ export const joinRooms = () => (dispatch, getState) => {
 export const joinRoom = (roomName, onSuccess, onError) => (dispatch, getState) => {
   const room = getRoomChannel(getState(), roomName)
 
-  if (room.state === "joined") {
+  if (room.state === 'joined') {
     if (onSuccess) { onSuccess() }
 
     return room
