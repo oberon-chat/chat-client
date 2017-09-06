@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { closeChat, openChat } from '../../actions/portable'
+import { fetchSocket } from '../../actions/socket'
 import { getIsOpen } from '../../reducers/portable'
+import NewMessageForm from './NewMessage'
 import './index.css'
 
 const Closed = ({ onOpen }) => {
@@ -27,27 +29,35 @@ const Opened = ({ onClose }) => {
     <div>
       <a onClick={onClick}>Close</a>
       Opened Chat
+      <NewMessageForm form='portableMessageForm' />
     </div>
   )
 }
 
-export const Portable = ({ isOpen, onClose, onOpen }) => {
-  return (
-    <div className='chat-portable'>
-      { isOpen ? <Opened onClose={onClose} /> : <Closed onOpen={onOpen} /> }
-    </div>
-  )
-}
+class Portable extends Component {
+  componentWillMount () {
+    this.props.onLoad()
+  }
 
-Portable.displayName = 'Portable'
+  render () {
+    const { isOpen, onClose, onOpen } = this.props
+
+    return (
+      <div className='chat-portable'>
+        { isOpen ? <Opened onClose={onClose} /> : <Closed onOpen={onOpen} /> }
+      </div>
+    )
+  }
+}
 
 const mapStateToProps = (state) => ({
   isOpen: getIsOpen(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
+  onClose: () => dispatch(closeChat()),
   onOpen: () => dispatch(openChat()),
-  onClose: () => dispatch(closeChat())
+  onLoad: () => dispatch(fetchSocket())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Portable)

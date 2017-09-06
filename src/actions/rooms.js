@@ -23,10 +23,12 @@ const updateRooms = (rooms) => ({
   rooms: rooms
 })
 
-export const joinRooms = () => (dispatch, getState) => {
+export const joinRooms = (onSuccess, onError) => (dispatch, getState) => {
   const rooms = getRoomsChannel(getState())
 
   if (rooms.state === 'joined') {
+    if (onSuccess) { return onSuccess() }
+
     return rooms
   }
 
@@ -47,14 +49,22 @@ export const joinRooms = () => (dispatch, getState) => {
       dispatch(updateRooms(updated))
     })
 
-    return rooms.join()
-      .receive('error', resp => { console.log('Unable to join', resp) })
-      .receive('ok', () => {
-        dispatch({
-          type: 'JOIN_ROOMS',
-          channel: rooms
-        })
+    const onJoinSuccess = () => {
+      dispatch({
+        type: 'JOIN_ROOMS',
+        channel: rooms
       })
+
+      if (onSuccess) { onSuccess() }
+    }
+
+    const onJoinError = (error) => {
+      if (onError) { onError(error) }
+    }
+
+    return rooms.join()
+      .receive('ok', onJoinSuccess)
+      .receive('error', onJoinError)
   })
 }
 
@@ -103,13 +113,13 @@ export const joinRoom = (roomName, onSuccess, onError) => (dispatch, getState) =
     ))
 
     const onJoinSuccess = () => {
-      if (onSuccess) { onSuccess() }
-
       dispatch({
         type: 'JOIN_ROOM',
         key: roomName,
         channel: room
       })
+
+      if (onSuccess) { onSuccess() }
     }
 
     const onJoinError = (error) => {

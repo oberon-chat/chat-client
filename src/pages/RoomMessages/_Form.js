@@ -10,7 +10,7 @@ const MessageInput = (props) => {
 
   return (
     <Input.TextArea
-      placeholder={'Send message to ' + props.room}
+      placeholder={'Send message ' + props.room || ''}
       onKeyDown={props.submitOnEnter}
       rows={rows}
       {...props.input}
@@ -69,7 +69,7 @@ MessageForm.displayName = 'MessageForm'
 MessageForm.propTypes = {
   form: PropTypes.string.isRequired, // Redux Form id
   onSubmit: PropTypes.func.isRequired,
-  room: PropTypes.string.isRequired
+  room: PropTypes.string
 }
 
 export default reduxForm({ enableReinitialize: true })(MessageForm)
