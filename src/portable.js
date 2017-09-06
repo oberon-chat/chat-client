@@ -1,3 +1,3 @@
-// import './app'
+import './app/portable'
 
 console.log('portable!')

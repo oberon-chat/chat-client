@@ -4,6 +4,7 @@ import { reducer as reduxFormReducer } from 'redux-form'
 import apolloClient from '../app/apolloClient'
 import currentUserReducer from './currentUser'
 import flashMessagesReducer from './flashMessages'
+import portableReducer from './portable'
 import roomsReducer from './rooms'
 import roomsJoinedReducer from './roomsJoined'
 import roomMessagesReducer from './roomMessages'
@@ -15,6 +16,7 @@ export default combineReducers({
   currentUser: currentUserReducer,
   flashMessages: flashMessagesReducer,
   form: reduxFormReducer,
+  portable: portableReducer,
   rooms: roomsReducer,
   roomsJoined: roomsJoinedReducer,
   roomMessages: roomMessagesReducer,
