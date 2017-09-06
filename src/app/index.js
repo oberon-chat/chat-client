@@ -9,7 +9,7 @@ import Layout from '../pages/Layout'
 import registerServiceWorker from './registerServiceWorker'
 import logoutExpiredSessions from './logoutExpiredSessions'
 
-const target = document.getElementById('root')
+const target = document.getElementById('chat-root')
 
 const App = (
   <ApolloProvider store={store} client={apolloClient}>

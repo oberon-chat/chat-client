@@ -19,6 +19,7 @@ const chalk = require('chalk');
 const fs = require('fs-extra');
 const webpack = require('webpack');
 const config = require('../config/webpack.config.prod');
+const configPortable = require('../config/webpack.config.prod.portable');
 const paths = require('../config/paths');
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
@@ -35,7 +36,7 @@ const WARN_AFTER_BUNDLE_GZIP_SIZE = 512 * 1024;
 const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
 
 // Warn and crash if required files are missing
-if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
+if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs, paths.appIndexJsPortable])) {
   process.exit(1);
 }
 
@@ -49,7 +50,8 @@ measureFileSizesBeforeBuild(paths.appBuild)
     // Merge with the public folder
     copyPublicFolder();
     // Start the webpack build
-    return build(previousFileSizes);
+    return build_portable(previousFileSizes)
+           .then(() => build(previousFileSizes))
   })
   .then(
     ({ stats, previousFileSizes, warnings }) => {
@@ -100,6 +102,43 @@ measureFileSizesBeforeBuild(paths.appBuild)
   );
 
 // Create the production build and print the deployment instructions.
+function build_portable(previousFileSizes) {
+  console.log('Creating an optimized production portable build...');
+
+  let compilerPortable = webpack(configPortable);
+
+  return new Promise((resolve, reject) => {
+    compilerPortable.run((err, stats) => {
+      if (err) {
+        return reject(err);
+      }
+      const messages = formatWebpackMessages(stats.toJson({}, true));
+      if (messages.errors.length) {
+        return reject(new Error(messages.errors.join('\n\n')));
+      }
+      if (
+        process.env.CI &&
+        (typeof process.env.CI !== 'string' ||
+          process.env.CI.toLowerCase() !== 'false') &&
+        messages.warnings.length
+      ) {
+        console.log(
+          chalk.yellow(
+            '\nTreating warnings as errors because process.env.CI = true.\n' +
+              'Most CI servers set it automatically.\n'
+          )
+        );
+        return reject(new Error(messages.warnings.join('\n\n')));
+      }
+      return resolve({
+        stats,
+        // previousFileSizes,
+        warnings: messages.warnings,
+      });
+    });
+  });
+}
+
 function build(previousFileSizes) {
   console.log('Creating an optimized production build...');
 
