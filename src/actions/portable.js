@@ -1,7 +1,12 @@
-export const closeChat = () => (dispatch) => {
-  dispatch({ type: 'CLOSE_PORTABLE' })
-}
+export const closeChat = () => ({
+  type: 'PORTABLE_CLOSE'
+})
 
-export const openChat = () => (dispatch) => {
-  dispatch({ type: 'OPEN_PORTABLE' })
-}
+export const openChat = () => ({
+  type: 'PORTABLE_OPEN'
+})
+
+export const activeRoom = (room) => ({
+  type: 'PORTABLE_ACTIVE_ROOM',
+  room: room
+})

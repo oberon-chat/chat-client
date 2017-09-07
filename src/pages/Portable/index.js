@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { closeChat, openChat } from '../../actions/portable'
 import { fetchSocket } from '../../actions/socket'
-import { getIsOpen } from '../../reducers/portable'
+import { getActiveRoom, getIsOpen } from '../../reducers/portable'
+import MessagesList from '../RoomMessages/_List'
 import NewMessageForm from './NewMessage'
 import './index.css'
 
@@ -18,7 +19,7 @@ const Closed = ({ onOpen }) => {
   )
 }
 
-const Opened = ({ onClose }) => {
+const Opened = ({ onClose, room }) => {
   const onClick = (event) => {
     if (event) { event.preventDefault() }
 
@@ -28,7 +29,7 @@ const Opened = ({ onClose }) => {
   return (
     <div>
       <a onClick={onClick}>Close</a>
-      Opened Chat
+      { room ? <MessagesList room={room} /> : <span>How can we help?</span> }
       <NewMessageForm form='portableMessageForm' />
     </div>
   )
@@ -40,18 +41,19 @@ class Portable extends Component {
   }
 
   render () {
-    const { isOpen, onClose, onOpen } = this.props
+    const { isOpen, onClose, onOpen, room } = this.props
 
     return (
       <div className='chat-portable'>
-        { isOpen ? <Opened onClose={onClose} /> : <Closed onOpen={onOpen} /> }
+        { isOpen ? <Opened onClose={onClose} room={room} /> : <Closed onOpen={onOpen} /> }
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  isOpen: getIsOpen(state)
+  isOpen: getIsOpen(state),
+  room: getActiveRoom(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
