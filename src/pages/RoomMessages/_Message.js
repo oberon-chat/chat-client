@@ -2,16 +2,19 @@ import React from 'react'
 import Markdown from '../../components/Markdown'
 import MessageActions from './_MessageActions'
 
-const Message = ({ currentUser, editing, message, onDelete, room }) => {
+const Message = ({ currentUser, editing, message, onDelete, renderHeading, room }) => {
   const { body, timestamp, user } = message
 
   return (
     <div className='message'>
-      <strong>{user}</strong>
-      {' '}
-      {new Date(timestamp).toLocaleTimeString()}
+      { renderHeading &&
+        <div className='message-heading'>
+          <strong>{user}</strong>
+          {' '}
+          {new Date(timestamp).toLocaleTimeString()}
+        </div>
+      }
       { editing ? ' (editing)' : ''}
-      <br />
       <Markdown value={body} />
       <MessageActions
         currentUser={currentUser}
