@@ -5,6 +5,7 @@ import { fetchSocket } from '../../actions/socket'
 import { getActiveRoom, getIsOpen } from '../../reducers/portable'
 import MessagesList from '../RoomMessages/_List'
 import NewMessageForm from './NewMessage'
+import '../../static/antd.css'
 import './index.css'
 
 const Closed = ({ onOpen }) => {
