@@ -6,7 +6,8 @@ import { getActiveRoom, getIsOpen } from '../../reducers/portable'
 import MessagesList from '../RoomMessages/_List'
 import NewMessageForm from './NewMessage'
 import '../../static/antd.css'
-import './index.css'
+import '../../static/common.css'
+import '../../static/portable.css'
 
 const Closed = ({ onOpen }) => {
   const onClick = (event) => {

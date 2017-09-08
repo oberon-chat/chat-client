@@ -77,6 +77,7 @@
     "build": "node scripts/build.js",
     "fix": "yarn standard -- --fix",
     "lint": "yarn standard",
+    "sass": "node-sass ./src/static/ -o ./src/static",
     "test": "node scripts/test.js --env=jsdom",
     "electron": "electron config/electron.js"
   },

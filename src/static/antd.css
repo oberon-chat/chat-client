@@ -1,6 +1,8 @@
 /**
  * - Grab the complete antd.css from a CDN: https://cdnjs.com/libraries/antd
+ * - Wrap everything in `#chat-root{ }`
  * - Comment out or remove `html` and `body` tags
+ * - Pull out any `@font-face` declarations to the top
  * - Install node-sass: `yarn global add node-sass`
  * - Compile using `node-sass ./src/static/ -w -o ./src/static/`
  */
