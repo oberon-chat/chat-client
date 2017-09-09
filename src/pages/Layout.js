@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { isLoggedIn } from '../reducers/currentUser'
-import Header from './Layout/_Header'
+import Content from './Layout/_Content'
+import Sidebar from './Layout/_Sidebar'
 import DraggableBanner from './Layout/_DraggableBanner'
 import FlashMessages from '../components/FlashMessages'
 import Page from './Layout/_Page'
@@ -30,10 +31,10 @@ export const Layout = ({ loggedIn }) => {
     <Page>
       <DraggableBanner />
       <FlashMessages />
-      <Header />
-      <div id='content' className='padded'>
+      <Sidebar />
+      <Content>
         { loggedIn ? loggedInRoutes : loggedOutRoutes }
-      </div>
+      </Content>
     </Page>
   )
 }

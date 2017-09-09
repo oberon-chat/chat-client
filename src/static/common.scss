@@ -52,7 +52,11 @@
     height: 100vh;
   }
 
-  .full-height {
+  .window-width {
+    width: 100vw;
+  }
+
+  .full-size {
     align-self: stretch;
     display: flex;
     height: 100%;
@@ -65,13 +69,31 @@
     justify-content: center;
   }
 
+  .scroll-container {
+    height: 100%;
+    overflow: scroll;
+    width: 100%;
+  }
+
   .padded {
     padding: 25px 50px;
   }
 
+  /* Layout */
+
+  .section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
   /* Content */
 
+  .message-list {
+
+  }
+
   .message {
-    background: #fff;
+
   }
 }

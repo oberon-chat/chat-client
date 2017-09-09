@@ -15,7 +15,7 @@ class Page extends Component {
     const { children } = this.props
 
     return (
-      <Layout className='ant-layout-has-sider window-height'>
+      <Layout className='ant-layout window-height window-width'>
         { children }
       </Layout>
     )

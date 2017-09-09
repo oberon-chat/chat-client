@@ -37,7 +37,7 @@ export const MessageList = ({ currentUser, editingMessageId, messages, room }) =
   }
 
   return (
-    <div>
+    <div className='message-list'>
       { map(messages, renderMessage) }
     </div>
   )

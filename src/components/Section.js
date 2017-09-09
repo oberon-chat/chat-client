@@ -2,7 +2,7 @@ import React from 'react'
 import { Icon } from 'antd'
 import classnames from 'classnames'
 
-export const Section = ({ children, heading, id, loading, padded, width }) => {
+export const Section = ({ children, footer, header, id, loading, padded, width }) => {
   const spinner = (
     <div className='full-height center-children'>
       <Icon className='section-loading-icon' type='loading' />
@@ -19,12 +19,19 @@ export const Section = ({ children, heading, id, loading, padded, width }) => {
         width: width || '100%'
       }}
     >
-      <div className='section-heading'>
-        { heading }
-      </div>
+      { header &&
+        <div className='section-header'>
+          { header }
+        </div>
+      }
       <div className={classnames('section-body', 'scroll-container', {'padded': padded})}>
         { loading ? spinner : children }
       </div>
+      { footer &&
+        <div className='section-footer'>
+          { footer }
+        </div>
+      }
     </div>
   )
 }

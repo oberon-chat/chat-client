@@ -10,13 +10,13 @@ import { meta } from '../../helpers/presence'
 import CreateRoomForm from './_Form'
 import { Icon } from 'antd'
 
-export class AllRooms extends Component {
+export class RoomsList extends Component {
   componentDidMount () {
     this.props.onJoin()
   }
 
   render () {
-    const { match, rooms, roomsJoined } = this.props
+    const { rooms, roomsJoined } = this.props
 
     const renderRoom = (room, name) => {
       const lastMessage = meta(room, 'last_message')
@@ -24,7 +24,7 @@ export class AllRooms extends Component {
 
       return (
         <li key={name}>
-          <Link to={match.url + '/' + name}>
+          <Link to={'/rooms/' + name}>
             <strong>{name}</strong>
           </Link>
           {' '}
@@ -61,4 +61,4 @@ const mapDispatchToProps = (dispatch) => ({
   onJoin: () => dispatch(joinRooms())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(AllRooms)
+export default connect(mapStateToProps, mapDispatchToProps)(RoomsList)

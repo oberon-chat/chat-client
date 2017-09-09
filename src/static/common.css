@@ -31,6 +31,7 @@
   font-size: 14px;
   line-height: 1.5;
   /* Structural Styles */
+  /* Layout */
   /* Content */ }
   #chat-root h1, #chat-root h2, #chat-root h3, #chat-root h4, #chat-root h5, #chat-root h6, #chat-root a, #chat-root p, #chat-root li, #chat-root input, #chat-root textarea, #chat-root span, #chat-root div {
     -webkit-font-smoothing: antialiased;
@@ -40,7 +41,9 @@
     border-bottom: 0px; }
   #chat-root .window-height {
     height: 100vh; }
-  #chat-root .full-height {
+  #chat-root .window-width {
+    width: 100vw; }
+  #chat-root .full-size {
     align-self: stretch;
     display: flex;
     height: 100%;
@@ -49,7 +52,13 @@
     align-items: center;
     display: flex;
     justify-content: center; }
+  #chat-root .scroll-container {
+    height: 100%;
+    overflow: scroll;
+    width: 100%; }
   #chat-root .padded {
     padding: 25px 50px; }
-  #chat-root .message {
-    background: #fff; }
+  #chat-root .section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; }
