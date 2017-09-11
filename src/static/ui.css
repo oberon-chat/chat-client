@@ -13,6 +13,7 @@ body {
   position: fixed; }
 
 #chat-root #sidebar {
+  flex-shrink: 0;
   width: 260px; }
 
 #chat-root #logo {
