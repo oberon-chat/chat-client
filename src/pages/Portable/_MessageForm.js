@@ -6,7 +6,7 @@ import { createRoom, joinRooms, joinRoom } from '../../actions/rooms'
 import { submitMessage } from '../../actions/roomMessages'
 import RoomMessagesForm from '../RoomMessages/_Form'
 
-export const NewMessage = ({ form, onSubmit }) => {
+export const MessageForm = ({ form, onSubmit }) => {
   return (
     <RoomMessagesForm
       form={form}
@@ -15,7 +15,7 @@ export const NewMessage = ({ form, onSubmit }) => {
   )
 }
 
-NewMessage.displayName = 'PortableNewMessage'
+MessageForm.displayName = 'PortableMessageForm'
 
 const mapStateToProps = (state) => ({
 
@@ -40,4 +40,4 @@ const mapDispatchToProps = (dispatch, { form, room }) => ({
   }
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewMessage)
+export default connect(mapStateToProps, mapDispatchToProps)(MessageForm)

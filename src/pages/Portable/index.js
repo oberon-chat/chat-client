@@ -4,7 +4,7 @@ import { closeChat, openChat } from '../../actions/portable'
 import { fetchSocket } from '../../actions/socket'
 import { getActiveRoom, getIsOpen } from '../../reducers/portable'
 import MessagesList from '../RoomMessages/_List'
-import NewMessageForm from './NewMessage'
+import MessageForm from './_MessageForm'
 import '../../static/antd-portable.css'
 import '../../static/common.css'
 import '../../static/portable.css'
@@ -32,7 +32,7 @@ const Opened = ({ onClose, room }) => {
     <div>
       <a onClick={onClick}>Close</a>
       { room ? <MessagesList room={room} /> : <span>How can we help?</span> }
-      <NewMessageForm form='portableMessageForm' />
+      <MessageForm form='portableMessageForm' />
     </div>
   )
 }
