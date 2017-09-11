@@ -12,12 +12,13 @@ import '../../static/common.css'
 import '../../static/ui.css'
 
 import Login from '../Login'
-import Rooms from '../Rooms'
+import Room from '../Room'
 
 export const Layout = ({ loggedIn }) => {
   const loggedInRoutes = (
     <Switch>
-      <Route path='/rooms' component={Rooms} />
+      <Route path={'/rooms/:room/messages/:messageId/edit'} component={Room} />
+      <Route path={'/rooms/:room'} component={Room} />
     </Switch>
   )
 
