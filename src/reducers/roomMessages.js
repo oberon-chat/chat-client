@@ -1,4 +1,4 @@
-import { find, map, reduce } from 'lodash'
+import { clone, find, map, reduce, reverse } from 'lodash'
 
 const initialState = {}
 
@@ -45,6 +45,9 @@ export const roomMessagesReducer = (state = initialState, action) => {
 export const getRoomMessages = (state, name) => state.roomMessages[name] || []
 export const getRoomMessage = (state, name, id) => (
   find(state.roomMessages[name], (message) => message.id === id) || {}
+)
+export const getLastRoomMessage = (state, name, user) => (
+  find(reverse(clone(state.roomMessages[name])), (message) => message.user === user) || {}
 )
 
 export default roomMessagesReducer

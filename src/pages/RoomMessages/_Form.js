@@ -11,7 +11,7 @@ const MessageInput = (props) => {
   return (
     <Input.TextArea
       placeholder={'Send message ' + props.room || ''}
-      onKeyDown={props.submitOnEnter}
+      onKeyDown={(event) => props.handleKeyDown(event, props)}
       rows={rows}
       {...props.input}
     />
@@ -33,15 +33,19 @@ const CancelButton = ({ disabled, onCancel }) => {
   )
 }
 
-export const MessageForm = ({ handleSubmit, onCancel, pristine, room, submitting, values }) => {
-  const submitOnEnter = (event) => {
+export const MessageForm = ({ handleSubmit, onCancel, onKeyDown, pristine, room, submitting }) => {
+  const handleKeyDown = (event, props) => {
+    if (onKeyDown) {
+      onKeyDown(event, props)
+    }
+
     if (event.keyCode === 13 && event.shiftKey === false) {
-      handleSubmit(values)
+      handleSubmit()
       event.preventDefault()
     }
   }
 
-  const fieldProps = { room: room, submitOnEnter: submitOnEnter }
+  const fieldProps = { handleKeyDown: handleKeyDown, room: room }
 
   return (
     <Form layout='inline' onSubmit={handleSubmit}>
