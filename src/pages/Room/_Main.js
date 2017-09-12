@@ -16,7 +16,7 @@ const RoomMain = ({ messageId, room }) => {
     : <NewMessage room={room} />
 
   return (
-    <Section header={header} footer={footer}>
+    <Section classes='chat-room-main' header={header} footer={footer}>
       <MessagesList editingMessageId={messageId} room={room} />
     </Section>
   )

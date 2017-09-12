@@ -16,7 +16,7 @@ class Room extends Component {
     const { messageId, room } = match.params
 
     return (
-      <div>
+      <div className='chat-room'>
         <Main messageId={messageId} room={room} />
         <Sidebar room={room} />
       </div>

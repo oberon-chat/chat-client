@@ -3,7 +3,7 @@ import Section from '../../components/Section'
 import RoomUsers from './_Users'
 
 const RoomSidebar = ({ room }) => (
-  <Section>
+  <Section classes='chat-room-sidebar' width='240px'>
     <RoomUsers room={room} />
   </Section>
 )

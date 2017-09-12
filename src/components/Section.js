@@ -2,7 +2,7 @@ import React from 'react'
 import { Icon } from 'antd'
 import classnames from 'classnames'
 
-export const Section = ({ children, footer, header, id, loading, padded, width }) => {
+export const Section = ({ children, classes, footer, header, id, loading, padded, width }) => {
   const spinner = (
     <div className='full-height center-children'>
       <Icon className='section-loading-icon' type='loading' />
@@ -12,7 +12,7 @@ export const Section = ({ children, footer, header, id, loading, padded, width }
   return (
     <div
       id={id}
-      className='section window-height'
+      className={'section window-height ' + classes}
       style={{
         minWidth: width || 'inherit',
         maxWidth: width || 'inherit',

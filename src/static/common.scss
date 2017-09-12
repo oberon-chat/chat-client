@@ -89,6 +89,20 @@
 
   /* Content */
 
+  .chat-room {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+    .chat-room-main {
+
+    }
+
+    .chat-room-sidebar {
+
+    }
+
   .message-list {
 
   }
