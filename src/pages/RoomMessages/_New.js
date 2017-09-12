@@ -33,7 +33,6 @@ export class NewMessage extends Component {
 
 const mapStateToProps = (state, { room }) => ({
   form: room + 'NewMessageForm',
-  room: room,
   onKeyDown: (event, props) => {
     if (event.keyCode === 38 && !get(props, 'input.value')) {
       const currentUser = getCurrentUser(state)
@@ -43,7 +42,8 @@ const mapStateToProps = (state, { room }) => ({
         history.push(editMessagePath(room, message.id))
       }
     }
-  }
+  },
+  room: room
 })
 
 const mapDispatchToProps = (dispatch, { room }) => ({

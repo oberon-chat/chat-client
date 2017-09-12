@@ -54,7 +54,7 @@
     justify-content: center; }
   #chat-root .scroll-container {
     height: 100%;
-    overflow: scroll;
+    overflow-y: auto;
     width: 100%; }
   #chat-root .padded {
     padding: 25px 50px; }

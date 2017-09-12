@@ -1,49 +1,59 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { map } from 'lodash'
 import { getCurrentUser } from '../../reducers/currentUser'
 import { getRoomMessages } from '../../reducers/roomMessages'
+import { scrollToBottom } from '../../helpers/scroll'
 import RoomMessage from './_Message'
 
-export const MessageList = ({ currentUser, editingMessageId, messages, room }) => {
-  let messageStart = 0
-  let messageUser
+class MessageList extends Component {
+  componentDidMount () {
+    scrollToBottom('.chat-room-main .section-body')
+  }
 
-  const renderMessage = (message) => {
-    const { timestamp, user } = message
-    const limit = 60 * 60 * 5
+  componentDidUpdate () {
+    scrollToBottom('.chat-room-main .section-body')
+  }
 
-    let renderHeading = false
+  render () {
+    const { currentUser, editingMessageId, messages, room } = this.props
+    let messageStart = 0
+    let messageUser
 
-    if (user !== messageUser) {
-      renderHeading = true
-      messageUser = user
-      messageStart = timestamp
-    } else if (timestamp - messageStart > limit) {
-      renderHeading = true
-      messageStart = timestamp
+    const renderMessage = (message) => {
+      const { timestamp, user } = message
+      const limit = 60 * 60 * 5
+
+      let renderHeading = false
+
+      if (user !== messageUser) {
+        renderHeading = true
+        messageUser = user
+        messageStart = timestamp
+      } else if (timestamp - messageStart > limit) {
+        renderHeading = true
+        messageStart = timestamp
+      }
+
+      return (
+        <RoomMessage
+          key={message.id}
+          editing={editingMessageId === message.id}
+          message={message}
+          currentUser={currentUser}
+          renderHeading={renderHeading}
+          room={room}
+        />
+      )
     }
 
     return (
-      <RoomMessage
-        key={message.id}
-        editing={editingMessageId === message.id}
-        message={message}
-        currentUser={currentUser}
-        renderHeading={renderHeading}
-        room={room}
-      />
+      <div className='message-list'>
+        { map(messages, renderMessage) }
+      </div>
     )
   }
-
-  return (
-    <div className='message-list'>
-      { map(messages, renderMessage) }
-    </div>
-  )
 }
-
-MessageList.displayName = 'RoomMessageList'
 
 const mapStateToProps = (state, { room }) => ({
   currentUser: getCurrentUser(state),
