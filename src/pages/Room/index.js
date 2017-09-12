@@ -8,12 +8,17 @@ import Sidebar from './_Sidebar'
 
 class Room extends Component {
   componentDidMount () {
-    this.props.onJoin()
+    this.props.onJoin(this.props.room)
+  }
+
+  componentWillReceiveProps (next) {
+    if (this.props.room !== next.room) {
+      this.props.onJoin(next.room)
+    }
   }
 
   render () {
-    const { match } = this.props
-    const { messageId, room } = match.params
+    const { messageId, room } = this.props
 
     return (
       <div className='chat-room'>
@@ -24,14 +29,13 @@ class Room extends Component {
   }
 }
 
-const mapStateToProps = () => ({
-
+const mapStateToProps = (_state, { match }) => ({
+  messageId: match.params.messageId,
+  room: match.params.room
 })
 
 const mapDispatchToProps = (dispatch, { match }) => ({
-  onJoin: () => {
-    const { room } = match.params
-
+  onJoin: (room) => {
     const onSuccess = () => {
       dispatch(viewRoom(room))
     }

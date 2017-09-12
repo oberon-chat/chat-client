@@ -12,8 +12,8 @@ const RoomMain = ({ messageId, room }) => {
   )
 
   const footer = messageId
-    ? <EditMessage messageId={messageId} room={room} />
-    : <NewMessage room={room} />
+    ? <EditMessage key={room} messageId={messageId} room={room} />
+    : <NewMessage key={room} room={room} />
 
   return (
     <Section classes='chat-room-main' header={header} footer={footer}>

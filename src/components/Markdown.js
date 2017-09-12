@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { findDOMNode } from 'react-dom'
-import { map } from 'lodash'
+import { isEmpty, map } from 'lodash'
 import { notification } from '../helpers/notification'
 import copyToClipboard from '../helpers/copyToClipboard'
 import { markdownToHtml, updateChecklist } from '../helpers/markdown'
@@ -56,7 +56,8 @@ class Markdown extends Component {
 
   render () {
     const { options, value } = this.props
-    const html = markdownToHtml(value || '', options || {})
+    const text = isEmpty(value) ? '' : value
+    const html = markdownToHtml(text, options || {})
 
     return (
       <div
