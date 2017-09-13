@@ -1,8 +1,8 @@
 import { getRoomChannel } from '../reducers/roomsJoined'
 import { getRoomMessage } from '../reducers/roomMessages'
 
-export const receiveMessage = (roomName, message) => ({
-  type: 'RECEIVE_ROOM_MESSAGE',
+export const addMessage = (roomName, message) => ({
+  type: 'ADD_ROOM_MESSAGE',
   key: roomName,
   message: message
 })
@@ -28,7 +28,7 @@ export const removeMessage = (roomName, message) => ({
 export const submitMessage = (roomName, message) => (dispatch, getState) => {
   const room = getRoomChannel(getState(), roomName)
 
-  return room.push('message:new', message)
+  return room.push('message:create', message)
 }
 
 export const editMessage = (roomName, messageId, body) => (dispatch, getState) => {

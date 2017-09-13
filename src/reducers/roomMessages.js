@@ -4,7 +4,7 @@ const initialState = {}
 
 export const roomMessagesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'RECEIVE_ROOM_MESSAGE':
+    case 'ADD_ROOM_MESSAGE':
       const current = state[action.key] || []
       const next = find(current, (message) => message.id === action.message.id)
         ? current
