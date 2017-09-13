@@ -2,31 +2,44 @@ import React from 'react'
 import Markdown from '../../components/Markdown'
 import MessageActions from './_MessageActions'
 import moment from 'moment'
-import { Icon, Tooltip } from 'antd'
+import { Avatar, Icon, Tooltip } from 'antd'
 
 const Message = ({ currentUser, editing, message, onDelete, renderHeading, room }) => {
   const { body, timestamp, user } = message
 
   return (
     <div className='message'>
-      { renderHeading &&
-        <div className='message-heading'>
-          <strong>{user}</strong>
-          {' '}
-          <Tooltip placement='top' title={moment(timestamp).calendar()}>
-            { moment(timestamp).format('h:mm A') }
-          </Tooltip>
-        </div>
-      }
-      <Markdown value={body} />
-      <MessageActions
-        currentUser={currentUser}
-        message={message}
-        room={room}
-      />
-      { editing &&
-        <Icon type='edit' />
-      }
+      <div className='message-gutter'>
+        { renderHeading &&
+          <Avatar icon='bulb' style={{ backgroundColor: '#108ee9' }} />
+        }
+        { !renderHeading &&
+          <div>
+            <div className='hover-timestamp'>
+              { moment(timestamp).format('h:mm') }
+            </div>
+            { editing && <Icon type='edit' /> }
+          </div>
+        }
+      </div>
+      <div className='message-content'>
+        { renderHeading &&
+          <div className='message-heading'>
+            { editing && <Icon type='edit' /> }
+            <strong>{user}</strong>
+            {' '}
+            <Tooltip placement='top' title={moment(timestamp).calendar()}>
+              { moment(timestamp).format('h:mm A') }
+            </Tooltip>
+          </div>
+        }
+        <Markdown value={body} />
+        <MessageActions
+          currentUser={currentUser}
+          message={message}
+          room={room}
+        />
+      </div>
     </div>
   )
 }

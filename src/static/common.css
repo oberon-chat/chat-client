@@ -80,15 +80,34 @@
     flex-direction: row;
     justify-content: space-between; }
   #chat-root .message {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     padding: 2px 0px;
     position: relative; }
-    #chat-root .message .message-actions {
-      display: none; }
-    #chat-root .message:hover {
-      background: #f7f7f7; }
-      #chat-root .message:hover .message-actions {
-        display: block;
+    #chat-root .message .message-gutter {
+      align-items: center;
+      display: flex;
+      flex-direction: flex-end;
+      min-height: 10px;
+      min-width: 40px;
+      max-width: 40px;
+      overflow: hidden; }
+      #chat-root .message .message-gutter .hover-timestamp {
+        color: #999;
+        display: none;
+        font-size: 10px; }
+    #chat-root .message .message-content {
+      width: 100%; }
+      #chat-root .message .message-content .message-actions {
+        display: none;
         position: absolute;
         top: -10px;
         right: 5px;
         z-index: 100; }
+    #chat-root .message:hover {
+      background: #f7f7f7; }
+      #chat-root .message:hover .hover-timestamp {
+        display: block; }
+      #chat-root .message:hover .message-actions {
+        display: block; }
