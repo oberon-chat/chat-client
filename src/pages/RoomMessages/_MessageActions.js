@@ -1,10 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import history from '../../app/history'
 import { deleteMessage } from '../../actions/roomMessages'
 import { editMessagePath } from '../../helpers/paths'
-import { Button, Icon, Modal } from 'antd'
+import { Button, Modal } from 'antd'
 
 const Actions = ({ currentUser, message, onDelete, room }) => {
   const { body, id, user } = message

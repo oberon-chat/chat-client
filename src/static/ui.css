@@ -14,6 +14,7 @@ body {
 
 #chat-root #sidebar {
   flex-shrink: 0;
+  padding: 15px;
   width: 260px; }
 
 #chat-root #logo {

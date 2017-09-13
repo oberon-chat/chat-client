@@ -25,7 +25,7 @@ const Message = ({ currentUser, editing, message, onDelete, renderHeading, room 
         room={room}
       />
       { editing &&
-        <Icon type='edit'> </Icon>
+        <Icon type='edit' />
       }
     </div>
   )

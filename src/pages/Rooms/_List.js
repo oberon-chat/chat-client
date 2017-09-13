@@ -41,11 +41,10 @@ export class RoomsList extends Component {
 
     return (
       <div>
-        <h1>Rooms</h1>
+        <h3>Rooms</h3>
         <ul>
           { map(rooms, renderRoom) }
         </ul>
-        <h3>Create Room</h3>
         <CreateRoomForm />
       </div>
     )

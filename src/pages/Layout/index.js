@@ -32,7 +32,7 @@ export const Layout = ({ loggedIn }) => {
     <Page>
       <DraggableBanner />
       <FlashMessages />
-      <Sidebar />
+      { loggedIn && <Sidebar /> }
       <Content>
         { loggedIn ? loggedInRoutes : loggedOutRoutes }
       </Content>
