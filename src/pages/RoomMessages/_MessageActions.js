@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import history from '../../app/history'
 import { deleteMessage } from '../../actions/roomMessages'
 import { editMessagePath } from '../../helpers/paths'
-import { Button, Modal } from 'antd'
+import { Button, Icon, Modal } from 'antd'
 
 const Actions = ({ currentUser, message, onDelete, room }) => {
   const { body, id, user } = message
@@ -13,7 +14,7 @@ const Actions = ({ currentUser, message, onDelete, room }) => {
       return null
     }
 
-    const onConfirm = (event) => {
+    const onDeleteConfirm = (event) => {
       if (event) { event.preventDefault() }
 
       Modal.confirm({
@@ -29,15 +30,19 @@ const Actions = ({ currentUser, message, onDelete, room }) => {
       })
     }
 
+    const onEdit = (event) => {
+      if (event) { event.preventDefault() }
+
+      history.push(editMessagePath(room, id))
+    }
+
     return (
-      <span>
-        <Button onClick={onConfirm}>
-          Delete
-        </Button>
-        <Link to={editMessagePath(room, id)}>
-          Edit
-        </Link>
-      </span>
+      <div className='message-actions'>
+        <Button.Group>
+          <Button icon='edit' onClick={onEdit} />
+          <Button icon='delete' onClick={onDeleteConfirm} />
+        </Button.Group>
+      </div>
     )
   }
 

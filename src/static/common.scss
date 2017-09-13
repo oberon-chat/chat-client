@@ -108,6 +108,23 @@
   }
 
   .message {
+    padding: 2px 0px;
+    position: relative;
 
+    .message-actions {
+      display: none;
+    }
+
+    &:hover {
+      background: #f6f6f6;
+
+      .message-actions {
+        display: block;
+        position: absolute;
+        top: -10px;
+        right: 0;
+        z-index: 100;
+      }
+    }
   }
 }
