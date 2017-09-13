@@ -11,7 +11,7 @@ const Message = ({ currentUser, editing, message, onDelete, renderHeading, room 
     <div className='message'>
       <div className='message-gutter'>
         { renderHeading &&
-          <Avatar icon='bulb' style={{ backgroundColor: '#108ee9' }} />
+          <Avatar shape='square' icon='bulb' style={{ backgroundColor: '#52b3f9' }} />
         }
         { !renderHeading &&
           <div>

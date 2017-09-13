@@ -111,3 +111,20 @@
         display: block; }
       #chat-root .message:hover .message-actions {
         display: block; }
+  #chat-root .chat-room-main .section-footer {
+    padding: 10px; }
+    #chat-root .chat-room-main .section-footer .chat-message-form {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      flex-grow: 1; }
+      #chat-root .chat-room-main .section-footer .chat-message-form .chat-message-form-input-container {
+        width: 100%; }
+        #chat-root .chat-room-main .section-footer .chat-message-form .chat-message-form-input-container .ant-form-item-control-wrapper {
+          width: 100%; }
+        #chat-root .chat-room-main .section-footer .chat-message-form .chat-message-form-input-container .ant-form-item-control {
+          line-height: inherit; }
+        #chat-root .chat-room-main .section-footer .chat-message-form .chat-message-form-input-container .chat-message-form-input {
+          width: 100%; }
+      #chat-root .chat-room-main .section-footer .chat-message-form .chat-message-form-actions {
+        flex-shrink: 0; }
