@@ -18,7 +18,14 @@ export class NewMessage extends Component {
   }
 
   render () {
-    const { form, onKeyDown, onSubmit, room } = this.props
+    const { form, lastMessage, onSubmit, room } = this.props
+    const onKeyDown = (event, props) => {
+      if (event.keyCode === 38 && !get(props, 'input.value')) {
+        if (!isEmpty(lastMessage)) {
+          history.push(editMessagePath(room, lastMessage.id))
+        }
+      }
+    }
 
     return (
       <MessageForm
@@ -31,20 +38,16 @@ export class NewMessage extends Component {
   }
 }
 
-const mapStateToProps = (state, { room }) => ({
-  form: room + 'NewMessageForm',
-  onKeyDown: (event, props) => {
-    if (event.keyCode === 38 && !get(props, 'input.value')) {
-      const currentUser = getCurrentUser(state)
-      const message = getLastRoomMessage(state, room, currentUser.username)
+const mapStateToProps = (state, { room }) => {
+  const currentUser = getCurrentUser(state)
+  const lastMessage = getLastRoomMessage(state, room, currentUser.username)
 
-      if (!isEmpty(message)) {
-        history.push(editMessagePath(room, message.id))
-      }
-    }
-  },
-  room: room
-})
+  return {
+    form: room + 'NewMessageForm',
+    lastMessage: lastMessage,
+    room: room
+  }
+}
 
 const mapDispatchToProps = (dispatch, { room }) => ({
   onSubmit: (data) => {
