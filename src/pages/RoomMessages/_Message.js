@@ -16,7 +16,9 @@ const Message = ({ currentUser, editing, message, onDelete, renderHeading, room 
         { !renderHeading &&
           <div>
             <div className='hover-timestamp'>
-              { moment(timestamp).format('h:mm') }
+              <Tooltip placement='top' title={moment(timestamp).calendar()}>
+                { moment(timestamp).format('h:mm') }
+              </Tooltip>
             </div>
             { editing && <Icon type='edit' /> }
           </div>
@@ -25,12 +27,12 @@ const Message = ({ currentUser, editing, message, onDelete, renderHeading, room 
       <div className='message-content'>
         { renderHeading &&
           <div className='message-heading'>
-            { editing && <Icon type='edit' /> }
             <strong>{user}</strong>
             {' '}
             <Tooltip placement='top' title={moment(timestamp).calendar()}>
               { moment(timestamp).format('h:mm A') }
             </Tooltip>
+            { editing && <Icon type='edit' /> }
           </div>
         }
         <Markdown value={body} />
