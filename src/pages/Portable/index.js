@@ -29,10 +29,14 @@ const Opened = ({ onClose, room }) => {
   }
 
   return (
-    <div>
+    <div className='chat-portable-open'>
       <a onClick={onClick}>Close</a>
-      { room ? <MessagesList room={room} /> : <span>How can we help?</span> }
-      <MessageForm form='portableMessageForm' />
+      <div className='chat-container scroll-container'>
+        { room ? <MessagesList room={room} /> : <span>How can we help?</span> }
+      </div>
+      <div className='chat-form-container'>
+        <MessageForm form='portableMessageForm' />
+      </div>
     </div>
   )
 }
@@ -44,9 +48,10 @@ class Portable extends Component {
 
   render () {
     const { isOpen, onClose, onOpen, room } = this.props
+    const classnames = 'chat-portable ' + (isOpen ? 'open' : 'closed')
 
     return (
-      <div className='chat-portable'>
+      <div className={classnames}>
         { isOpen ? <Opened onClose={onClose} room={room} /> : <Closed onOpen={onOpen} /> }
       </div>
     )

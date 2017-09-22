@@ -178,32 +178,32 @@
 
   .chat-room-main .section-footer {
     padding: 10px;
+  }
+}
 
-    .chat-message-form {
-      display: flex;
-      justify-content: space-between;
-      flex-direction: row;
-      flex-grow: 1;
+.chat-message-form {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-grow: 1;
 
-      .chat-message-form-input-container {
-        width: 100%;
+  .chat-message-form-input-container {
+    width: 100%;
 
-        .ant-form-item-control-wrapper {
-          width: 100%;
-        }
-
-        .ant-form-item-control {
-          line-height: inherit;
-        }
-
-        .chat-message-form-input {
-          width: 100%;
-        }
-      }
-
-      .chat-message-form-actions {
-        flex-shrink: 0;
-      }
+    .ant-form-item-control-wrapper {
+      width: 100%;
     }
+
+    .ant-form-item-control {
+      line-height: inherit;
+    }
+
+    .chat-message-form-input {
+      width: 100%;
+    }
+  }
+
+  .chat-message-form-actions {
+    flex-shrink: 0;
   }
 }
