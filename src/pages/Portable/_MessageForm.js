@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { reset as resetForm } from 'redux-form'
-import { activeRoom } from '../../actions/portable'
+import { setActiveRoom } from '../../actions/portable'
 import { createRoom, joinRooms, joinRoom } from '../../actions/rooms'
 import { submitMessage } from '../../actions/roomMessages'
+import { shortUuid } from '../../helpers/uuid'
 import RoomMessagesForm from '../RoomMessages/_Form'
 
 export const MessageForm = ({ form, onSubmit }) => {
@@ -21,19 +22,20 @@ const mapStateToProps = (state) => ({
 
 })
 
-const mapDispatchToProps = (dispatch, { form, room }) => ({
+const mapDispatchToProps = (dispatch, { form, activeRoom }) => ({
   onSubmit: (data) => {
-    const onJoinRoom = async () => {
-      dispatch(activeRoom('test'))
-      await dispatch(submitMessage('test', data.message))
+    const room = activeRoom || 'user-' + shortUuid()
+    const onJoinRooms = async () => {
+      if (!activeRoom) { await dispatch(createRoom(room)) }
 
-      return dispatch(resetForm(form))
+      return dispatch(joinRoom(room, onJoinRoom))
     }
 
-    const onJoinRooms = async () => {
-      if (!room) { await dispatch(createRoom('test')) }
+    const onJoinRoom = async () => {
+      dispatch(setActiveRoom(room))
+      await dispatch(submitMessage(room, data.message))
 
-      return dispatch(joinRoom('test', onJoinRoom))
+      return dispatch(resetForm(form))
     }
 
     return dispatch(joinRooms(onJoinRooms))

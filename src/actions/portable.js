@@ -6,7 +6,7 @@ export const openChat = () => ({
   type: 'PORTABLE_OPEN'
 })
 
-export const activeRoom = (room) => ({
+export const setActiveRoom = (room) => ({
   type: 'PORTABLE_ACTIVE_ROOM',
   room: room
 })

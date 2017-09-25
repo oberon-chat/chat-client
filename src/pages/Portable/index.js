@@ -21,7 +21,7 @@ const Closed = ({ onOpen }) => {
   )
 }
 
-const Opened = ({ onClose, room }) => {
+const Opened = ({ onClose, activeRoom }) => {
   const onClick = (event) => {
     if (event) { event.preventDefault() }
 
@@ -32,10 +32,10 @@ const Opened = ({ onClose, room }) => {
     <div className='chat-portable-open'>
       <a onClick={onClick}>Close</a>
       <div className='chat-container scroll-container'>
-        { room ? <MessagesList room={room} /> : <span>How can we help?</span> }
+        { activeRoom ? <MessagesList room={activeRoom} /> : <span>How can we help?</span> }
       </div>
       <div className='chat-form-container'>
-        <MessageForm form='portableMessageForm' />
+        <MessageForm activeRoom={activeRoom} form='portableMessageForm' />
       </div>
     </div>
   )
@@ -47,12 +47,12 @@ class Portable extends Component {
   }
 
   render () {
-    const { isOpen, onClose, onOpen, room } = this.props
+    const { isOpen, onClose, onOpen, activeRoom } = this.props
     const classnames = 'chat-portable ' + (isOpen ? 'open' : 'closed')
 
     return (
       <div className={classnames}>
-        { isOpen ? <Opened onClose={onClose} room={room} /> : <Closed onOpen={onOpen} /> }
+        { isOpen ? <Opened onClose={onClose} activeRoom={activeRoom} /> : <Closed onOpen={onOpen} /> }
       </div>
     )
   }
@@ -60,7 +60,7 @@ class Portable extends Component {
 
 const mapStateToProps = (state) => ({
   isOpen: getIsOpen(state),
-  room: getActiveRoom(state)
+  activeRoom: getActiveRoom(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({
