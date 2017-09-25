@@ -114,14 +114,17 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    flex: 1;
   }
 
     .chat-room-main {
-
+      display: flex;
+      flex: 1;
+      flex-direction: column;
     }
 
     .chat-room-sidebar {
-
+      flex-basis: 240px;
     }
 
   .message-list {
@@ -136,9 +139,7 @@
     position: relative;
 
     .message-gutter {
-      align-items: center;
       display: flex;
-      flex-direction: flex-end;
       min-height: 10px;
       min-width: 40px;
       max-width: 40px;
@@ -152,6 +153,9 @@
     }
 
     .message-content {
+      padding-right: 10px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
       width: 100%;
 
       .message-actions {
@@ -160,6 +164,12 @@
         top: -10px;
         right: 5px;
         z-index: 100;
+      }
+
+      pre {
+        white-space: pre-wrap;
+        word-break: normal;
+        word-wrap: break-word;
       }
     }
 
@@ -176,34 +186,34 @@
     }
   }
 
+  .chat-message-form {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-grow: 1;
+
+    .chat-message-form-input-container {
+      width: 100%;
+
+      .ant-form-item-control-wrapper {
+        width: 100%;
+      }
+
+      .ant-form-item-control {
+        line-height: inherit;
+      }
+
+      .chat-message-form-input {
+        width: 100%;
+      }
+    }
+
+    .chat-message-form-actions {
+      flex-shrink: 0;
+    }
+  }
+
   .chat-room-main .section-footer {
     padding: 10px;
-  }
-}
-
-.chat-message-form {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-  flex-grow: 1;
-
-  .chat-message-form-input-container {
-    width: 100%;
-
-    .ant-form-item-control-wrapper {
-      width: 100%;
-    }
-
-    .ant-form-item-control {
-      line-height: inherit;
-    }
-
-    .chat-message-form-input {
-      width: 100%;
-    }
-  }
-
-  .chat-message-form-actions {
-    flex-shrink: 0;
   }
 }
