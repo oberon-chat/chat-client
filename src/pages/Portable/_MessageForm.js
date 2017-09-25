@@ -25,17 +25,17 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch, { form, activeRoom }) => ({
   onSubmit: (data) => {
     const room = activeRoom || 'user-' + shortUuid()
-    const onJoinRooms = async () => {
-      if (!activeRoom) { await dispatch(createRoom(room)) }
-
-      return dispatch(joinRoom(room, onJoinRoom))
-    }
-
     const onJoinRoom = async () => {
       dispatch(setActiveRoom(room))
       await dispatch(submitMessage(room, data.message))
 
       return dispatch(resetForm(form))
+    }
+
+    const onJoinRooms = async () => {
+      if (!activeRoom) { await dispatch(createRoom(room)) }
+
+      return dispatch(joinRoom(room, onJoinRoom))
     }
 
     return dispatch(joinRooms(onJoinRooms))
