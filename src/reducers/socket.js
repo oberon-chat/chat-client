@@ -6,27 +6,12 @@ const initialState = {
 
 const socketReducer = (state = initialState, action) => {
   switch (action.type) {
-    case `SOCKET_NEW`:
+    case 'SOCKET_NEW':
       return {...state, connection: action.connection}
-    case `SOCKET_OPEN`:
+    case 'SOCKET_OPEN':
       return {...state, connected: true}
-    case `SOCKET_CLOSE`:
-      if (state.connection) {
-        state.connection.disconnect()
-      }
-
-      return {...state, connected: false}
-    case `FETCH_TOKEN_SUCCESS`: {
-      if (state.connection) {
-        state.connection.disconnect()
-      }
-
-      return {
-        ...state,
-        connected: false,
-        connection: null
-      }
-    }
+    case 'SOCKET_CLOSE':
+      return initialState
     default:
       return state
   }

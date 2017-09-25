@@ -6,9 +6,21 @@ export const socketOpen = () => ({
   type: 'SOCKET_OPEN'
 })
 
-export const socketClose = () => ({
-  type: 'SOCKET_CLOSE'
-})
+export const socketClose = (callback) => (dispatch, getState) => {
+  const state = getState()
+  const socket = getSocket(state)
+  const handleDisconnect = () => {
+    dispatch({
+      type: 'SOCKET_CLOSE'
+    })
+
+    if (callback) {
+      callback()
+    }
+  }
+
+  socket.connection.disconnect(handleDisconnect)
+}
 
 export const socketError = (message) => ({
   type: 'SOCKET_ERROR',

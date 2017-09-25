@@ -15,6 +15,11 @@ export const roomsReducer = (state = initialState, action) => {
         ...state,
         rooms: action.rooms
       }
+    case 'SOCKET_CLOSE':
+      return {
+        ...state,
+        channel: undefined
+      }
     default:
       return state
   }
