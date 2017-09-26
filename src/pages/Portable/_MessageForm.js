@@ -4,7 +4,6 @@ import { reset as resetForm } from 'redux-form'
 import { setActiveRoom } from '../../actions/portable'
 import { createRoom, joinRooms, joinRoom } from '../../actions/rooms'
 import { submitMessage } from '../../actions/roomMessages'
-import { shortUuid } from '../../helpers/uuid'
 import RoomMessagesForm from '../RoomMessages/_Form'
 
 export const MessageForm = ({ form, onSubmit }) => {
@@ -22,9 +21,8 @@ const mapStateToProps = (state) => ({
 
 })
 
-const mapDispatchToProps = (dispatch, { form, activeRoom }) => ({
+const mapDispatchToProps = (dispatch, { isActive, form, room }) => ({
   onSubmit: (data) => {
-    const room = activeRoom || 'user-' + shortUuid()
     const onJoinRoom = async () => {
       dispatch(setActiveRoom(room))
       await dispatch(submitMessage(room, data.message))
@@ -33,7 +31,7 @@ const mapDispatchToProps = (dispatch, { form, activeRoom }) => ({
     }
 
     const onJoinRooms = async () => {
-      if (!activeRoom) { await dispatch(createRoom(room)) }
+      if (!isActive) { await dispatch(createRoom(room)) }
 
       return dispatch(joinRoom(room, onJoinRoom))
     }

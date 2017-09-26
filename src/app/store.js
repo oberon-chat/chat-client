@@ -8,7 +8,7 @@ import rootReducer from '../reducers'
 
 const initialState = {}
 const enhancers = [
-  persistState('currentUser', {key: 'chat'})
+  persistState(['currentUser', 'portable'], {key: 'chat'})
 ]
 const middleware = [
   thunk,

@@ -6263,7 +6263,7 @@ redux-form@^7.0.1:
     lodash-es "^4.17.3"
     prop-types "^15.5.9"
 
-redux-localstorage@^0.4.1:
+redux-localstorage:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/redux-localstorage/-/redux-localstorage-0.4.1.tgz#faf6d719c581397294d811473ffcedee065c933c"
 

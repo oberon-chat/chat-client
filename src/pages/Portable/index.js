@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { closeChat, openChat } from '../../actions/portable'
 import { fetchSocket } from '../../actions/socket'
-import { getActiveRoom, getIsOpen } from '../../reducers/portable'
+import { getActiveRoom, getHasRecentActivity, getIsOpen } from '../../reducers/portable'
+import { shortUuid } from '../../helpers/uuid'
 import MessagesList from '../RoomMessages/_List'
 import MessageForm from './_MessageForm'
 import '../../static/antd-portable.css'
@@ -17,11 +18,11 @@ const Closed = ({ onOpen }) => {
   }
 
   return (
-    <a onClick={onClick}>Start Chat</a>
+    <a onClick={onClick}>Chat</a>
   )
 }
 
-const Opened = ({ onClose, activeRoom }) => {
+const Opened = ({ isActive, onClose, room }) => {
   const onClick = (event) => {
     if (event) { event.preventDefault() }
 
@@ -32,10 +33,14 @@ const Opened = ({ onClose, activeRoom }) => {
     <div className='chat-portable-open'>
       <a onClick={onClick}>Close</a>
       <div className='chat-container scroll-container'>
-        { activeRoom ? <MessagesList room={activeRoom} /> : <span>How can we help?</span> }
+        { isActive ? <MessagesList room={room} /> : <span>How can we help?</span> }
       </div>
       <div className='chat-form-container'>
-        <MessageForm activeRoom={activeRoom} form='portableMessageForm' />
+        <MessageForm
+          form='portableMessageForm'
+          isActive={isActive}
+          room={room}
+        />
       </div>
     </div>
   )
@@ -47,21 +52,39 @@ class Portable extends Component {
   }
 
   render () {
-    const { isOpen, onClose, onOpen, activeRoom } = this.props
-    const classnames = 'chat-portable ' + (isOpen ? 'open' : 'closed')
+    const { isActive, isClosed, onClose, onOpen, room } = this.props
+    const classnames = 'chat-portable ' + (isClosed ? 'closed' : 'open')
+
+    if (isClosed) {
+      return (
+        <div className={classnames}>
+          <Closed onOpen={onOpen} />
+        </div>
+      )
+    }
 
     return (
       <div className={classnames}>
-        { isOpen ? <Opened onClose={onClose} activeRoom={activeRoom} /> : <Closed onOpen={onOpen} /> }
+        <Opened isActive={isActive} onClose={onClose} room={room} />
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) => ({
-  isOpen: getIsOpen(state),
-  activeRoom: getActiveRoom(state)
-})
+const mapStateToProps = (state) => {
+  const newRoom = 'user-' + shortUuid()
+  const isActive = getHasRecentActivity(state)
+  const activeRoom = getActiveRoom(state)
+
+  console.log('state', state)
+  console.log('state.portable', state.portable)
+
+  return {
+    isActive: isActive,
+    isClosed: !getIsOpen(state),
+    room: isActive ? activeRoom : newRoom
+  }
+}
 
 const mapDispatchToProps = (dispatch) => ({
   onClose: () => dispatch(closeChat()),
