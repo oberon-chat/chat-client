@@ -1,48 +1,34 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { login as loginCurrentUser } from '../../actions/currentUser'
 import { fetchSocket } from '../../actions/socket'
 import { isLoggedIn } from '../../reducers/currentUser'
 import history from '../../app/history'
-import ParticleNetwork from '../../lib/particles'
+import Particles from '../../components/Particles'
 import Redirect from '../../components/Redirect'
 import LoginForm from './_LoginForm'
 
-class Login extends Component {
-  componentDidMount () {
-    const container = document.querySelector('#login-background')
-    const options = {
-      density: 10000,
-      velocity: 0.5
-    }
-
-    new ParticleNetwork(container, options) // eslint-disable-line
+const Login = ({ loggedIn, onLogin }) => {
+  if (loggedIn) {
+    return <Redirect to={'/rooms'} />
   }
 
-  render () {
-    const { loggedIn, onLogin } = this.props
+  const onSubmit = async (values) => {
+    onLogin(values)
+    history.push('/rooms')
+  }
 
-    if (loggedIn) {
-      return <Redirect to={'/rooms'} />
-    }
-
-    const onSubmit = async (values) => {
-      onLogin(values)
-      history.push('/rooms')
-    }
-
-    return (
-      <div id='login-container'>
-        <div id='login-background' />
-        <div id='login-content' className='center-children'>
-          <div>
-            <h1>Login</h1>
-            <LoginForm onSubmit={onSubmit} />
-          </div>
+  return (
+    <div id='login-container'>
+      <Particles id='login-background' />
+      <div id='login-content' className='center-children'>
+        <div>
+          <h1>Login</h1>
+          <LoginForm onSubmit={onSubmit} />
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 const mapStateToProps = (state) => ({
