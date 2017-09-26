@@ -6,7 +6,7 @@ import FlashMessages from '../../components/FlashMessages'
 import LoginPage from './Login'
 
 export const Login = () => (
-  <LayoutComponent className='window-height'>
+  <LayoutComponent className='window-height window-width'>
     <DraggableBanner />
     <FlashMessages />
     <Switch>
