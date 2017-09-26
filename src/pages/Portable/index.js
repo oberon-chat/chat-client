@@ -88,9 +88,6 @@ const mapStateToProps = (state) => {
   const isActive = getHasRecentActivity(state)
   const activeRoom = getActiveRoom(state)
 
-  console.log('state', state)
-  console.log('state.portable', state.portable)
-
   return {
     isActive: isActive,
     isClosed: !getIsOpen(state),
