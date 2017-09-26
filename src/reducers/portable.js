@@ -29,6 +29,11 @@ const portableReducer = (state = initialState, action) => {
         activeRoom: action.room,
         lastActivity: Date.now()
       }
+    case 'PORTABLE_NEW':
+      return {
+        ...initialState,
+        isOpen: true
+      }
     default:
       return state
   }

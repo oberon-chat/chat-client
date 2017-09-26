@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { closeChat, openChat } from '../../actions/portable'
-import { fetchSocket } from '../../actions/socket'
+import { closeChat, newChat, openChat } from '../../actions/portable'
+import { fetchSocket, socketClose } from '../../actions/socket'
 import { getActiveRoom, getHasRecentActivity, getIsOpen } from '../../reducers/portable'
 import { shortUuid } from '../../helpers/uuid'
 import MessagesList from '../RoomMessages/_List'
@@ -22,16 +22,23 @@ const Closed = ({ onOpen }) => {
   )
 }
 
-const Opened = ({ isActive, onClose, room }) => {
-  const onClick = (event) => {
+const Opened = ({ isActive, onClose, onNew, room }) => {
+  const handleClose = (event) => {
     if (event) { event.preventDefault() }
 
     return onClose()
   }
 
+  const handleNew = (event) => {
+    if (event) { event.preventDefault() }
+
+    return onNew()
+  }
+
   return (
     <div className='chat-portable-open'>
-      <a onClick={onClick}>Close</a>
+      <a onClick={handleClose}>Close</a>
+      <a onClick={handleNew}>New Chat</a>
       <div className='chat-container scroll-container'>
         { isActive ? <MessagesList room={room} /> : <span>How can we help?</span> }
       </div>
@@ -52,7 +59,7 @@ class Portable extends Component {
   }
 
   render () {
-    const { isActive, isClosed, onClose, onOpen, room } = this.props
+    const { isActive, isClosed, onClose, onNew, onOpen, room } = this.props
     const classnames = 'chat-portable ' + (isClosed ? 'closed' : 'open')
 
     if (isClosed) {
@@ -65,7 +72,12 @@ class Portable extends Component {
 
     return (
       <div className={classnames}>
-        <Opened isActive={isActive} onClose={onClose} room={room} />
+        <Opened
+          isActive={isActive}
+          onClose={onClose}
+          onNew={onNew}
+          room={room}
+        />
       </div>
     )
   }
@@ -88,8 +100,14 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onClose: () => dispatch(closeChat()),
-  onOpen: () => dispatch(openChat()),
-  onLoad: () => dispatch(fetchSocket())
+  onLoad: () => dispatch(fetchSocket()),
+  onNew: () => {
+    const afterFetch = () => dispatch(newChat())
+    const afterClose = () => dispatch(fetchSocket(afterFetch))
+
+    dispatch(socketClose(afterClose))
+  },
+  onOpen: () => dispatch(openChat())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Portable)

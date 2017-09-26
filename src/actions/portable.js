@@ -10,3 +10,7 @@ export const setActiveRoom = (room) => ({
   type: 'PORTABLE_ACTIVE_ROOM',
   room: room
 })
+
+export const newChat = () => ({
+  type: 'PORTABLE_NEW'
+})
