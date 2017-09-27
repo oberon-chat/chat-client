@@ -8,6 +8,9 @@ import store from './store'
 import Layout from '../pages/Layout'
 import registerServiceWorker from './registerServiceWorker'
 import logoutExpiredSessions from './logoutExpiredSessions'
+import { setClientType } from '../actions/client'
+
+store.dispatch(setClientType('web'))
 
 const target = document.getElementById('chat-root')
 

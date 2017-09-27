@@ -38,7 +38,7 @@ const Opened = ({ isActive, onClose, onNew, room }) => {
 
   return (
     <div className='chat-portable-open'>
-      <a onClick={handleClose}>Close</a>
+      <a onClick={handleClose}>Minimize</a>
       <a onClick={handleNew}>New Chat</a>
       <div className='chat-container scroll-container'>
         { isActive ? <MessagesList room={room} /> : <span>How can we help?</span> }

@@ -1,8 +1,9 @@
 import React from 'react'
-import Markdown from '../../components/Markdown'
 import MessageActions from './_MessageActions'
 import moment from 'moment'
-import { Avatar, Icon, Tooltip } from 'antd'
+import Markdown from '../../components/Markdown'
+import Tooltip from '../../components/Tooltip'
+import { Avatar, Icon } from 'antd'
 
 const Message = ({ currentUser, editing, message, onDelete, renderHeading, room }) => {
   const { body, timestamp, user } = message
