@@ -98,27 +98,34 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  onClose: () => dispatch(closeChat()),
-  onLoad: (room, isActive) => {
+const mapDispatchToProps = (dispatch) => {
+  const onNew = () => {
+    const afterFetch = () => dispatch(newChat())
+    const afterClose = () => dispatch(fetchSocket(afterFetch))
+
+    dispatch(socketClose(afterClose))
+  }
+
+  const onLoad = (room, isActive) => {
     let afterFetch
 
     if (isActive) {
-      const afterJoinRoom = () => dispatch(setActiveRoom(room))
-      const afterJoinRooms = () => dispatch(joinRoom(room, afterJoinRoom))
+      const onJoinRoomSuccess = () => dispatch(setActiveRoom(room))
+      const onJoinRoomError = () => onNew()
+      const afterJoinRooms = () => dispatch(joinRoom(room, onJoinRoomSuccess, onJoinRoomError))
 
       afterFetch = () => dispatch(joinRooms(afterJoinRooms))
     }
 
     dispatch(fetchSocket(afterFetch))
-  },
-  onNew: () => {
-    const afterFetch = () => dispatch(newChat())
-    const afterClose = () => dispatch(fetchSocket(afterFetch))
+  }
 
-    dispatch(socketClose(afterClose))
-  },
-  onOpen: () => dispatch(openChat())
-})
+  return {
+    onClose: () => dispatch(closeChat()),
+    onLoad: onLoad,
+    onNew: onNew,
+    onOpen: () => dispatch(openChat())
+  }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Portable)
