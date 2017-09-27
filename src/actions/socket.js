@@ -54,6 +54,6 @@ export const fetchSocket = (callback) => (dispatch, getState) => {
   }
 
   if (callback) {
-    dispatch(callback())
+    callback()
   }
 }

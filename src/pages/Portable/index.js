@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { closeChat, newChat, openChat } from '../../actions/portable'
+import { closeChat, newChat, openChat, setActiveRoom } from '../../actions/portable'
+import { joinRooms, joinRoom } from '../../actions/rooms'
 import { fetchSocket, socketClose } from '../../actions/socket'
 import { getActiveRoom, getHasRecentActivity, getIsOpen } from '../../reducers/portable'
 import { shortUuid } from '../../helpers/uuid'
@@ -55,7 +56,9 @@ const Opened = ({ isActive, onClose, onNew, room }) => {
 
 class Portable extends Component {
   componentWillMount () {
-    this.props.onLoad()
+    const { isActive, room } = this.props
+
+    this.props.onLoad(room, isActive)
   }
 
   render () {
@@ -97,7 +100,18 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   onClose: () => dispatch(closeChat()),
-  onLoad: () => dispatch(fetchSocket()),
+  onLoad: (room, isActive) => {
+    let afterFetch
+
+    if (isActive) {
+      const afterJoinRoom = () => dispatch(setActiveRoom(room))
+      const afterJoinRooms = () => dispatch(joinRoom(room, afterJoinRoom))
+
+      afterFetch = () => dispatch(joinRooms(afterJoinRooms))
+    }
+
+    dispatch(fetchSocket(afterFetch))
+  },
   onNew: () => {
     const afterFetch = () => dispatch(newChat())
     const afterClose = () => dispatch(fetchSocket(afterFetch))
