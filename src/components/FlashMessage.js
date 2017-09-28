@@ -16,7 +16,7 @@ class FlashMessage extends Component {
     clearTimeout(this.timeout)
   }
 
-  render () {
+  componentDidUpdate () {
     const { message, onClose } = this.props
     const close = (event) => {
       if (event) { event.preventDefault() }
@@ -30,7 +30,9 @@ class FlashMessage extends Component {
       placement: 'bottomRight',
       type: message.messageType
     })
+  }
 
+  render () {
     return null
   }
 }

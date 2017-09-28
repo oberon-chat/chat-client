@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Route, Switch, withRouter } from 'react-router-dom'
 import { isLoggedIn } from '../../reducers/currentUser'
+import ErrorHandler from '../../components/ErrorHandler'
 import FlashMessages from '../../components/FlashMessages'
 import DraggableBanner from './_DraggableBanner'
 import Page from './_Page'
@@ -33,8 +34,10 @@ export const Layout = ({ loggedIn }) => {
     <Page>
       <DraggableBanner />
       <FlashMessages />
-      { loggedIn && <Sidebar /> }
-      { loggedIn ? loggedInRoutes : loggedOutRoutes }
+      <ErrorHandler>
+        { loggedIn && <Sidebar /> }
+        { loggedIn ? loggedInRoutes : loggedOutRoutes }
+      </ErrorHandler>
     </Page>
   )
 }
