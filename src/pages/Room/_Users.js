@@ -5,7 +5,7 @@ import { getRoomUsers } from '../../reducers/roomUsers'
 import StatusDot from '../../components/StatusDot'
 
 export const RoomUsers = ({ users }) => (
-  <div>
+  <div className='scroll-container'>
     <h3>Users</h3>
     <ul>
       { map(users, (_metas, name) => (

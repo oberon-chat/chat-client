@@ -134,23 +134,6 @@
     }
   }
 
-  .chat-room {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex: 1;
-  }
-
-    .chat-room-main {
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-    }
-
-    .chat-room-sidebar {
-      flex-basis: 240px;
-    }
-
   .message-list {
 
   }
@@ -237,7 +220,7 @@
     }
   }
 
-  .chat-room-main .section-footer {
+  .chat-room-content .section-footer {
     padding: 10px;
   }
 }

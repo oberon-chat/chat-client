@@ -6,29 +6,59 @@ body {
   width: 100vw;
 }
 
-#chat-root {
+/* Structure */
 
-  .ant-layout {
-    background: #fff;
+.ant-layout {
+  background: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: fixed;
+}
+
+#sidebar {
+  flex-shrink: 0;
+  padding: 15px;
+  width: 260px;
+}
+
+  #logo {
+    color: #515365;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+#main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+  #header {
+    width: 100%;
+  }
+
+  #content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    position: fixed;
-  }
-
-  #sidebar {
-    flex-shrink: 0;
-    padding: 15px;
-    width: 260px;
-  }
-
-    #logo {
-      color: #515365;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-  #content {
+    height: 100%;
     width: 100%;
+
+    &.padded {
+      padding: 15px;
+    }
   }
+
+/* Structure - Room */
+
+.chat-room-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 0 0 10px 0;
+}
+
+.chat-room-sidebar {
+  flex-basis: 240px;
 }

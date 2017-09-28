@@ -3,8 +3,11 @@ import { connect } from 'react-redux'
 import history from '../../app/history'
 import { joinRoom, viewRoom } from '../../actions/rooms'
 import notification from '../../helpers/notification'
-import Main from './_Main'
-import Sidebar from './_Sidebar'
+import RoomContent from './_Content'
+import RoomSidebar from './_Sidebar'
+import Content from '../Layout/_Content'
+import Header from '../Layout/_Header'
+import Main from '../Layout/_Main'
 
 class Room extends Component {
   componentDidMount () {
@@ -21,10 +24,15 @@ class Room extends Component {
     const { messageId, room } = this.props
 
     return (
-      <div className='chat-room'>
-        <Main messageId={messageId} room={room} />
-        <Sidebar room={room} />
-      </div>
+      <Main classes='chat-room'>
+        <Header>
+          <h1>{ room }</h1>
+        </Header>
+        <Content>
+          <RoomContent messageId={messageId} room={room} />
+          <RoomSidebar room={room} />
+        </Content>
+      </Main>
     )
   }
 }

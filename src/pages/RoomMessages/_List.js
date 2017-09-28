@@ -8,12 +8,12 @@ import RoomMessage from './_Message'
 
 class MessageList extends Component {
   componentDidMount () {
-    scrollToBottom('.chat-room-main .section-body')
+    scrollToBottom('.chat-room-content .scroll-container')
     scrollToBottom('.chat-portable .chat-container')
   }
 
   componentDidUpdate () {
-    scrollToBottom('.chat-room-main .section-body')
+    scrollToBottom('.chat-room-content .scroll-container')
     scrollToBottom('.chat-portable .chat-container')
   }
 

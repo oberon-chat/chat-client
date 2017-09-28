@@ -93,17 +93,6 @@
       position: fixed;
       width: 30%;
       z-index: 100; }
-  #chat-root .chat-room {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex: 1; }
-  #chat-root .chat-room-main {
-    display: flex;
-    flex: 1;
-    flex-direction: column; }
-  #chat-root .chat-room-sidebar {
-    flex-basis: 240px; }
   #chat-root .message {
     display: flex;
     flex-direction: row;
@@ -156,5 +145,5 @@
         width: 100%; }
     #chat-root .chat-message-form .chat-message-form-actions {
       flex-shrink: 0; }
-  #chat-root .chat-room-main .section-footer {
+  #chat-root .chat-room-content .section-footer {
     padding: 10px; }

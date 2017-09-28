@@ -5,22 +5,47 @@ body {
   padding: 0px;
   width: 100vw; }
 
-#chat-root .ant-layout {
+/* Structure */
+.ant-layout {
   background: #fff;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   position: fixed; }
 
-#chat-root #sidebar {
+#sidebar {
   flex-shrink: 0;
   padding: 15px;
   width: 260px; }
 
-#chat-root #logo {
+#logo {
   color: #515365;
   font-size: 14px;
   font-weight: 600; }
 
-#chat-root #content {
+#main {
+  display: flex;
+  flex-direction: column;
   width: 100%; }
+
+#header {
+  width: 100%; }
+
+#content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%; }
+  #content.padded {
+    padding: 15px; }
+
+/* Structure - Room */
+.chat-room-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 0 0 10px 0; }
+
+.chat-room-sidebar {
+  flex-basis: 240px; }

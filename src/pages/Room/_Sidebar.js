@@ -1,11 +1,10 @@
 import React from 'react'
-import Section from '../../components/Section'
 import RoomUsers from './_Users'
 
 const RoomSidebar = ({ room }) => (
-  <Section classes='chat-room-sidebar' width='240px'>
+  <div className='chat-room-sidebar'>
     <RoomUsers room={room} />
-  </Section>
+  </div>
 )
 
 RoomSidebar.displayName = 'RoomSidebar'

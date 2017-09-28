@@ -1,7 +1,7 @@
 import React from 'react'
 
-const Content = ({ children }) => (
-  <div id='content' className='window-height'>
+const Content = ({ children, classes }) => (
+  <div id='content' className={ classes }>
     { children }
   </div>
 )
