@@ -104,11 +104,11 @@ export const joinRoom = (roomName, onSuccess, onError) => (dispatch, getState) =
       dispatch(addMessage(roomName, data))
     ))
 
-    room.on('message:update', (data) => (
+    room.on('message:updated', (data) => (
       dispatch(replaceMessage(roomName, data))
     ))
 
-    room.on('message:delete', (data) => (
+    room.on('message:deleted', (data) => (
       dispatch(removeMessage(roomName, data))
     ))
 

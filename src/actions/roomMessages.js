@@ -28,7 +28,7 @@ export const removeMessage = (roomName, message) => ({
 export const submitMessage = (roomName, message) => (dispatch, getState) => {
   const room = getRoomChannel(getState(), roomName)
 
-  return room.push('message:create', message)
+  return room.push('message:create', { body: message })
 }
 
 export const editMessage = (roomName, messageId, body) => (dispatch, getState) => {
