@@ -6,7 +6,7 @@ import Tooltip from '../../components/Tooltip'
 import { Avatar, Icon } from 'antd'
 
 const Message = ({ currentUser, editing, message, onDelete, renderHeading, room }) => {
-  const { body, timestamp, user } = message
+  const { body, insertedAt, user } = message
 
   return (
     <div className='message'>
@@ -17,8 +17,8 @@ const Message = ({ currentUser, editing, message, onDelete, renderHeading, room 
         { !renderHeading &&
           <div>
             <div className='hover-timestamp'>
-              <Tooltip placement='top' title={moment(timestamp).calendar()}>
-                { moment(timestamp).format('h:mm') }
+              <Tooltip placement='top' title={moment(insertedAt).calendar()}>
+                { moment(insertedAt).format('h:mm') }
               </Tooltip>
             </div>
             { editing && <Icon type='edit' /> }
@@ -28,10 +28,10 @@ const Message = ({ currentUser, editing, message, onDelete, renderHeading, room 
       <div className='message-content'>
         { renderHeading &&
           <div className='message-heading'>
-            <strong>{user}</strong>
+            <strong>{user.name}</strong>
             {' '}
-            <Tooltip placement='top' title={moment(timestamp).calendar()}>
-              { moment(timestamp).format('h:mm A') }
+            <Tooltip placement='top' title={moment(insertedAt).calendar()}>
+              { moment(insertedAt).format('h:mm A') }
             </Tooltip>
             { editing && <Icon type='edit' /> }
           </div>

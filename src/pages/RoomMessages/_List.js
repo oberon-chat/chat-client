@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { map } from 'lodash'
+import moment from 'moment'
 import { getCurrentUser } from '../../reducers/currentUser'
 import { getRoomMessages } from '../../reducers/roomMessages'
 import { scrollToBottom } from '../../helpers/scroll'
@@ -20,18 +21,18 @@ class MessageList extends Component {
   render () {
     const { currentUser, editingMessageId, messages, room } = this.props
     let messageStart = 0
-    let messageUser
+    let messageUser = {}
 
     const renderMessage = (message) => {
-      const { timestamp, user } = message
-      const limit = 60 * 60 * 5
+      const { insertedAt, user } = message
+      const timestamp = moment(insertedAt).unix()
+      const limit = 60 * 5
 
       let renderHeading = false
 
-      if (user !== messageUser) {
+      if (user.id !== messageUser.id) {
         renderHeading = true
         messageUser = user
-        messageStart = timestamp
       } else if (timestamp - messageStart > limit) {
         renderHeading = true
         messageStart = timestamp
