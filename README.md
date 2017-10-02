@@ -9,7 +9,12 @@
 The Oberon chat client requires the following packages to be installed:
 
 - Node >= 6
-- Yarn >= 0.16
+
+Then install the node packages:
+
+```
+npm --global install node-sass yarn
+```
 
 ### Development Server
 
