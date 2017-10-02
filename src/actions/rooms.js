@@ -1,6 +1,6 @@
 import { Presence } from 'phoenix'
 import { map, reverse } from 'lodash'
-import camelcaseKeys from 'camelcase-keys'
+import { camelizeKeys } from 'humps'
 import { addMessage, removeMessage, replaceMessage, replaceMessages } from './roomMessages'
 import { updateRoomUsers } from './roomUsers'
 import { getRooms, getRoomsChannel } from '../reducers/rooms'
@@ -97,21 +97,21 @@ export const joinRoom = (roomName, onSuccess, onError) => (dispatch, getState) =
 
     room.on('message_state', (data) => {
       const messages = reverse((data || {}).messages)
-      const cased = map(messages, camelcaseKeys)
+      const cased = map(messages, (message) => camelizeKeys(message, {}))
 
       dispatch(replaceMessages(roomName, cased))
     })
 
     room.on('message:created', (data) => (
-      dispatch(addMessage(roomName, camelcaseKeys(data)))
+      dispatch(addMessage(roomName, camelizeKeys(data, {})))
     ))
 
     room.on('message:updated', (data) => (
-      dispatch(replaceMessage(roomName, camelcaseKeys(data)))
+      dispatch(replaceMessage(roomName, camelizeKeys(data, {})))
     ))
 
     room.on('message:deleted', (data) => (
-      dispatch(removeMessage(roomName, camelcaseKeys(data)))
+      dispatch(removeMessage(roomName, camelizeKeys(data, {})))
     ))
 
     const onJoinSuccess = () => {
