@@ -20,22 +20,26 @@ const socketReducer = (state = initialState, action) => {
 export const getSocket = (state) => state.socket
 export const getSocketConnection = (state) => state.socket.connection
 export const isConnected = (state) => state.socket.connected
-export const withSocketConnection = (getState, callback, attempt = 0) => {
+export const withSocketConnection = (getState, callback, attempt = 0, throwOnError = false) => {
   const interval = 25
   const max = Math.ceil(5000 / interval)
 
   setTimeout(() => {
     if (attempt >= max) {
-      throw new Error('Could not retrieve socket connection')
+      if (throwOnError) {
+        throw new Error('Could not retrieve socket connection')
+      } else {
+        return false
+      }
     }
 
     const state = getState()
     const socket = state.socket.connection
 
     if (socket) {
-      callback(socket)
+      return callback(socket)
     } else {
-      withSocketConnection(getState, callback, attempt + 1)
+      return withSocketConnection(getState, callback, attempt + 1)
     }
   }, interval)
 }
