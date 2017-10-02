@@ -8,6 +8,7 @@ import DraggableBanner from './_DraggableBanner'
 import Page from './_Page'
 import Main from './_Main'
 import Sidebar from './_Sidebar'
+import ConnectionError from '../../components/ConnectionError'
 import '../../static/antd.css'
 import '../../static/common.css'
 import '../../static/ui.css'
@@ -35,6 +36,7 @@ export const Layout = ({ loggedIn }) => {
       <DraggableBanner />
       <FlashMessages />
       <ErrorHandler>
+        { loggedIn && <ConnectionError /> }
         { loggedIn && <Sidebar /> }
         { loggedIn ? loggedInRoutes : loggedOutRoutes }
       </ErrorHandler>

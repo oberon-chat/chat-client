@@ -5,6 +5,7 @@ import { joinRooms, joinRoom } from '../../actions/rooms'
 import { fetchSocket, socketClose } from '../../actions/socket'
 import { getActiveRoom, getHasRecentActivity, getIsOpen } from '../../reducers/portable'
 import { shortUuid } from '../../helpers/uuid'
+import ConnectionError from '../../components/ConnectionError'
 import MessagesList from '../RoomMessages/_List'
 import MessageForm from './_MessageForm'
 import '../../static/antd-portable.css'
@@ -38,6 +39,7 @@ const Opened = ({ isActive, onClose, onNew, room }) => {
 
   return (
     <div className='chat-portable-open'>
+      { isActive && <ConnectionError /> }
       <a onClick={handleClose}>Minimize</a>
       <a onClick={handleNew}>New Chat</a>
       <div className='chat-container scroll-container'>

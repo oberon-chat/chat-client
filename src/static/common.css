@@ -71,10 +71,31 @@
       background: #ccc; }
   #chat-root .padded {
     padding: 25px 50px; }
+  #chat-root .chat-overlay {
+    background: rgba(0, 0, 0, 0.25);
+    bottom: 000;
+    color: #222;
+    display: flex;
+    flex-direction: column;
+    left: 0px;
+    line-height: 100%;
+    overflow: hidden;
+    right: 0px;
+    text-align: center;
+    position: absolute;
+    top: 0px;
+    z-index: 2000; }
   #chat-root .section {
     display: flex;
     flex-direction: column;
     justify-content: space-between; }
+  #chat-root .connection-error {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 10%;
+    max-height: 100px; }
   #chat-root #login-container {
     position: relative;
     height: 100vh;
