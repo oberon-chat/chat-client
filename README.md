@@ -45,6 +45,6 @@ To run the desktop application use `yarn electron`.
 
 #### Portable Application
 
-To run the portable development server run `yarn portable`.
+To run the portable development server run `PORT=7030 yarn portable`.
 
 **Note**: In order to run the server a production build must be generated using `yarn build`.
