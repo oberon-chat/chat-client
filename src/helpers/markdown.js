@@ -1,4 +1,6 @@
 import showdown from 'showdown'
+import escapeHtml from 'escape-html'
+import sanitizeHtml from 'sanitize-html'
 import 'showdown-highlightjs-extension'
 
 export const createParser = (passedOptions = {}) => {
@@ -18,10 +20,12 @@ export const addCopyCodeBlocks = (value) => {
 
 export const markdownToHtml = (value, options = {}) => {
   const parser = createParser(options)
-  const html = parser.makeHtml(value)
+  const escaped = escapeHtml(value)
+  const html = parser.makeHtml(escaped)
   const withExtensions = addCopyCodeBlocks(html)
+  const sanitized = sanitizeHtml(withExtensions)
 
-  return withExtensions
+  return sanitized
 }
 
 export const updateChecklist = (value, index, isChecked) => {
