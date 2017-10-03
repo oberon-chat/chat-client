@@ -5,7 +5,7 @@ import moment from 'moment'
 import { getCurrentUser } from '../../reducers/currentUser'
 import { getRoomMessages } from '../../reducers/roomMessages'
 import { scrollToBottom } from '../../helpers/scroll'
-import RoomMessage from './_Message'
+import Message from './_One'
 
 class MessageList extends Component {
   componentDidMount () {
@@ -43,7 +43,7 @@ class MessageList extends Component {
       }
 
       return (
-        <RoomMessage
+        <Message
           key={message.id}
           editing={editingMessageId === message.id}
           message={message}

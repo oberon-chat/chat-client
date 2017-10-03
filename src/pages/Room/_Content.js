@@ -1,7 +1,7 @@
 import React from 'react'
-import MessagesList from '../RoomMessages/_List'
-import EditMessage from '../RoomMessages/_Edit'
-import NewMessage from '../RoomMessages/_New'
+import MessagesList from '../Messages/_List'
+import EditMessage from '../Messages/_Edit'
+import NewMessage from '../Messages/_New'
 
 const RoomContent = ({ messageId, room }) => {
   const footer = messageId

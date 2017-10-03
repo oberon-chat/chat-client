@@ -47,6 +47,6 @@ const Message = ({ currentUser, editing, message, onDelete, renderHeading, room 
   )
 }
 
-Message.displayName = 'RoomMessage'
+Message.displayName = 'Message'
 
 export default Message
