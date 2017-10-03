@@ -26,9 +26,9 @@ yarn install
 
 To start the Oberon chat client:
 
-1. Create a `.envrc` file. Use the example file as a starting point: `cp .envrc.example .envrc`.
+1. Create a `.env` file. Use the example file as a starting point: `cp .env.example .env`.
 
-1. (Optional) Update values in `.envrc` to match the development environment.
+1. (Optional) Update values in `.env` to match the development environment.
 
 1. Start the client server `yarn start`.
 
