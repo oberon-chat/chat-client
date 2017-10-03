@@ -20,13 +20,17 @@ class MessageList extends Component {
 
   render () {
     const { currentUser, editingMessageId, messages, room } = this.props
-    let messageStart = 0
     let messageUser = {}
+    let messageStart
 
     const renderMessage = (message) => {
       const { insertedAt, user } = message
       const timestamp = moment(insertedAt).unix()
       const limit = 60 * 5
+
+      if (!messageStart) {
+        messageStart = timestamp
+      }
 
       let renderHeading = false
 
