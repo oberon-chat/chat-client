@@ -47,7 +47,7 @@ export const getRoomMessage = (state, name, id) => (
   find(state.roomMessages[name], (message) => message.id === id) || {}
 )
 export const getLastRoomMessage = (state, name, user) => (
-  find(reverse(clone(state.roomMessages[name])), (message) => message.user === user) || {}
+  find(reverse(clone(state.roomMessages[name])), (message) => message.user.name === user) || {}
 )
 
 export default roomMessagesReducer
