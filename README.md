@@ -38,3 +38,13 @@ To start the Oberon chat client:
 
 **Note:** the client can also be run as a desktop application using `yarn
 electron`.
+
+#### Desktop Application
+
+To run the desktop application use `yarn electron`.
+
+#### Portable Application
+
+To run the portable development server run `yarn portable`.
+
+**Note**: In order to run the server a production build must be generated using `yarn build`.

@@ -82,7 +82,8 @@
     "lint": "yarn standard",
     "sass": "node-sass ./src/static/ -o ./src/static",
     "test": "node scripts/test.js --env=jsdom",
-    "electron": "electron config/electron.js"
+    "electron": "electron config/electron.js",
+    "portable": "bin/portable"
   },
   "standard": {
     "ignore": [
