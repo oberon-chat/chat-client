@@ -61,7 +61,6 @@
     "redux-thunk": "^2.2.0",
     "sanitize-html": "^1.14.1",
     "showdown": "^1.7.1",
-    "showdown-highlightjs-extension": "^0.1.2",
     "standard": "^10.0.2",
     "style-loader": "0.18.2",
     "sw-precache-webpack-plugin": "0.11.3",

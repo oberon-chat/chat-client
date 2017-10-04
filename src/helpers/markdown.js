@@ -1,7 +1,7 @@
 import showdown from 'showdown'
 import escapeHtml from 'escape-html'
 import sanitizeHtml from 'sanitize-html'
-import 'showdown-highlightjs-extension'
+import '../lib/showdown-highlightjs-extension'
 
 export const createParser = (passedOptions = {}) => {
   showdown.setFlavor('github')
@@ -22,10 +22,22 @@ export const markdownToHtml = (value, options = {}) => {
   const parser = createParser(options)
   const escaped = escapeHtml(value)
   const html = parser.makeHtml(escaped)
-  const withExtensions = addCopyCodeBlocks(html)
-  const sanitized = sanitizeHtml(withExtensions)
+  const sanitized = sanitizeHtml(html, {
+    allowedAttributes: {
+      a: [ 'href', 'name', 'target' ],
+      code: [ 'class' ],
+      img: [ 'src' ],
+      span: [ 'class' ]
+    },
+    allowedTags: [
+      'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'p', 'a', 'ul', 'ol',
+      'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'code', 'hr', 'br', 'div',
+      'span', 'table', 'thead', 'caption', 'tbody', 'tr', 'th', 'td', 'pre'
+    ]
+  })
+  const withExtensions = addCopyCodeBlocks(sanitized)
 
-  return sanitized
+  return withExtensions
 }
 
 export const updateChecklist = (value, index, isChecked) => {
