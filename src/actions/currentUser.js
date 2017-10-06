@@ -1,7 +1,8 @@
-import { clearCache } from '../helpers/cache'
 import { deleteToken, updateToken } from '../helpers/token'
+import { resetAllStores } from '../app/graphql'
+import { joinChannel } from './channels'
 
-export const login = (values) => {
+export const logIn = (values) => {
   updateToken(values.token)
 
   return {
@@ -10,16 +11,31 @@ export const login = (values) => {
   }
 }
 
-export const logout = () => {
+export const logOut = () => {
   deleteToken()
-  clearCache()
+  resetAllStores()
 
   return {
     type: 'CURRENT_USER_LOGOUT'
   }
 }
 
-export const updatePreferences = (values) => ({
-  type: 'CURRENT_USER_UPDATE_PREFERENCES',
-  values
-})
+export const updateCurrentUser = (values) => {
+  return {
+    type: 'CURRENT_USER_UPDATE',
+    values
+  }
+}
+
+export const joinUsersChannel = (onSuccess, onError) => (dispatch, getState) => {
+  const key = 'users'
+  const channelCallbacks = (channel) => {
+    channel.on('users:current', (data) => {
+      dispatch(updateCurrentUser(data))
+    })
+
+    return channel
+  }
+
+  return joinChannel(dispatch, getState, key, channelCallbacks, onSuccess, onError)
+}
