@@ -40,7 +40,7 @@ export class NewMessage extends Component {
 
 const mapStateToProps = (state, { room }) => {
   const currentUser = getCurrentUser(state)
-  const lastMessage = getLastRoomMessage(state, room, currentUser.id)
+  const lastMessage = getLastRoomMessage(state, room, currentUser)
 
   return {
     form: room + 'NewMessageForm',

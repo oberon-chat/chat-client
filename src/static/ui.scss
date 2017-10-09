@@ -8,57 +8,91 @@ body {
 
 /* Structure */
 
-.ant-layout {
-  background: #fff;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  position: fixed;
-}
+#chat-root {
 
-#sidebar {
-  flex-shrink: 0;
-  padding: 15px;
-  width: 260px;
-}
-
-  #logo {
-    color: #515365;
-    font-size: 14px;
-    font-weight: 600;
-  }
-
-#main {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-  #header {
-    width: 100%;
-  }
-
-  #content {
+  .ant-layout {
+    background: #fff;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: 100%;
-    width: 100%;
-
-    &.padded {
-      padding: 15px;
-    }
+    position: fixed;
   }
 
-/* Structure - Room */
+  #sidebar {
+    flex-shrink: 0;
+    padding: 15px;
+    width: 260px;
+  }
 
-.chat-room-content {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 0 0 10px 0;
-}
+    #logo {
+      color: #515365;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
 
-.chat-room-sidebar {
-  flex-basis: 240px;
+  #main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+    #header {
+      padding: 10px 0 10px 20px;
+      width: 100%;
+    }
+
+    #content {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      height: 100%;
+      width: 100%;
+
+      &.padded {
+        padding: 15px;
+      }
+    }
+
+  /* Structure - Room */
+
+  .chat-room-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 0 0 10px 0;
+  }
+
+  .chat-room-sidebar {
+    flex-basis: 240px;
+    padding: 0 0 0 20px;
+  }
+
+  .chat-room-content-footer {
+    padding: 0 0 0 20px;
+  }
+
+  /* Content */
+
+  .message-list {
+    padding: 0 0 0 16px;
+  }
+
+  .message {
+    padding: 4px 0 4px 4px;
+  }
+
+  /* Themes */
+
+  .ant-layout {
+
+    &.theme-light {
+
+      #sidebar {
+        background: #fdfdfd;
+        box-shadow: inset -20px 0px 30px -20px #f1f1f1;
+      }
+    }
+  }
 }

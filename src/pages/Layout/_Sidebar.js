@@ -5,7 +5,7 @@ import UserDropdown from '../User/_Dropdown'
 const Sidebar = ({ children }) => (
   <div id='sidebar' className='window-height'>
     <div id='logo'>
-      Chat
+      Oberon
     </div>
     <UserDropdown />
     <div className='scroll-container'>

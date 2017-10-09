@@ -6,46 +6,55 @@ body {
   width: 100vw; }
 
 /* Structure */
-.ant-layout {
-  background: #fff;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  position: fixed; }
-
-#sidebar {
-  flex-shrink: 0;
-  padding: 15px;
-  width: 260px; }
-
-#logo {
-  color: #515365;
-  font-size: 14px;
-  font-weight: 600; }
-
-#main {
-  display: flex;
-  flex-direction: column;
-  width: 100%; }
-
-#header {
-  width: 100%; }
-
-#content {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 100%;
-  width: 100%; }
-  #content.padded {
-    padding: 15px; }
-
-/* Structure - Room */
-.chat-room-content {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 0 0 10px 0; }
-
-.chat-room-sidebar {
-  flex-basis: 240px; }
+#chat-root {
+  /* Structure - Room */
+  /* Content */
+  /* Themes */ }
+  #chat-root .ant-layout {
+    background: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: fixed; }
+  #chat-root #sidebar {
+    flex-shrink: 0;
+    padding: 15px;
+    width: 260px; }
+  #chat-root #logo {
+    color: #515365;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase; }
+  #chat-root #main {
+    display: flex;
+    flex-direction: column;
+    width: 100%; }
+  #chat-root #header {
+    padding: 10px 0 10px 20px;
+    width: 100%; }
+  #chat-root #content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%; }
+    #chat-root #content.padded {
+      padding: 15px; }
+  #chat-root .chat-room-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 0 0 10px 0; }
+  #chat-root .chat-room-sidebar {
+    flex-basis: 240px;
+    padding: 0 0 0 20px; }
+  #chat-root .chat-room-content-footer {
+    padding: 0 0 0 20px; }
+  #chat-root .message-list {
+    padding: 0 0 0 16px; }
+  #chat-root .message {
+    padding: 4px 0 4px 4px; }
+  #chat-root .ant-layout.theme-light #sidebar {
+    background: #fdfdfd;
+    box-shadow: inset -20px 0px 30px -20px #f1f1f1; }

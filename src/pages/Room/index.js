@@ -26,7 +26,7 @@ class Room extends Component {
     return (
       <Main classes='chat-room'>
         <Header>
-          <h1>{ room }</h1>
+          <h2>{ room }</h2>
         </Header>
         <Content>
           <RoomContent messageId={messageId} room={room} />
