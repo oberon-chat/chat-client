@@ -8,6 +8,7 @@ body {
 /* Structure */
 #chat-root {
   /* Structure - Room */
+  /* Sidebar */
   /* Content */
   /* Themes */ }
   #chat-root .ant-layout {
@@ -51,6 +52,8 @@ body {
     padding: 0 0 0 20px; }
   #chat-root .chat-room-content-footer {
     padding: 0 0 0 20px; }
+  #chat-root #sidebar .rooms-list-container {
+    margin: 15px 0; }
   #chat-root .message-list {
     padding: 0 0 0 16px; }
   #chat-root .message {

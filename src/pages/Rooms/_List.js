@@ -33,7 +33,7 @@ export class RoomsList extends Component {
     }
 
     return (
-      <div>
+      <div className='rooms-list-container'>
         <h3>Rooms</h3>
         <ul className='rooms-list'>
           { map(rooms, renderRoom) }
