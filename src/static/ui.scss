@@ -51,7 +51,7 @@ body {
       width: 100%;
 
       &.padded {
-        padding: 15px;
+        padding: 20px;
       }
     }
 
@@ -75,8 +75,20 @@ body {
 
   /* Sidebar */
 
-  #sidebar .rooms-list-container {
-    margin: 15px 0;
+  #sidebar {
+
+    .chat-rooms-list-heading {
+      display: flex;
+      justify-content: space-between;
+
+      .chat-new-room-link {
+        color: rgba(0, 0, 0, 0.85);
+      }
+    }
+
+    .rooms-list-container {
+      margin: 15px 0;
+    }
   }
 
   /* Content */

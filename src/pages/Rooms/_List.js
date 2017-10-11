@@ -7,7 +7,8 @@ import { joinRooms } from '../../actions/rooms'
 import { getRooms } from '../../reducers/rooms'
 import { getLastViewed } from '../../reducers/roomsMeta'
 import { meta } from '../../helpers/presence'
-import CreateRoomForm from './_Form'
+import { newRoomPath } from '../../helpers/paths'
+import { Icon } from 'antd'
 
 export class RoomsList extends Component {
   componentDidMount () {
@@ -34,11 +35,15 @@ export class RoomsList extends Component {
 
     return (
       <div className='rooms-list-container'>
-        <h3>Rooms</h3>
+        <div className='chat-rooms-list-heading'>
+          <h3>Rooms</h3>
+          <Link className='chat-new-room-link' to={newRoomPath()}>
+            <Icon type='plus-circle-o' />
+          </Link>
+        </div>
         <ul className='rooms-list'>
           { map(rooms, renderRoom) }
         </ul>
-        <CreateRoomForm />
       </div>
     )
   }

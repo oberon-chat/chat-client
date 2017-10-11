@@ -14,6 +14,8 @@ export const url = (path = '/') => (
   join(parser(window.location).origin, path)
 )
 
+export const newRoomPath = () => '/rooms/new'
+
 export const roomPath = (room) => join('/rooms/', room)
 
 export const editMessagePath = (room, id) => (

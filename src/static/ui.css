@@ -41,7 +41,7 @@ body {
     height: 100%;
     width: 100%; }
     #chat-root #content.padded {
-      padding: 15px; }
+      padding: 20px; }
   #chat-root .chat-room-content {
     display: flex;
     flex: 1;
@@ -52,6 +52,11 @@ body {
     padding: 0 0 0 20px; }
   #chat-root .chat-room-content-footer {
     padding: 0 0 0 20px; }
+  #chat-root #sidebar .chat-rooms-list-heading {
+    display: flex;
+    justify-content: space-between; }
+    #chat-root #sidebar .chat-rooms-list-heading .chat-new-room-link {
+      color: rgba(0, 0, 0, 0.85); }
   #chat-root #sidebar .rooms-list-container {
     margin: 15px 0; }
   #chat-root .message-list {
