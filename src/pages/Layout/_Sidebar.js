@@ -1,5 +1,5 @@
 import React from 'react'
-import RoomsList from '../Rooms/_List'
+import RoomsSidebar from '../Rooms/_Sidebar'
 import UserDropdown from '../User/_Dropdown'
 
 const Sidebar = ({ children }) => (
@@ -9,7 +9,7 @@ const Sidebar = ({ children }) => (
     </div>
     <UserDropdown />
     <div className='scroll-container'>
-      <RoomsList />
+      <RoomsSidebar />
       { children }
     </div>
   </div>
