@@ -14,9 +14,13 @@ export const url = (path = '/') => (
   join(parser(window.location).origin, path)
 )
 
-export const newRoomPath = () => '/new-room'
+export const rootPath = '/'
 
-export const searchRoomsPath = (room) => join('/search-rooms')
+export const newDirectMessagePath = '/new-direct-message'
+
+export const newRoomPath = '/new-room'
+
+export const searchRoomsPath = '/search-rooms'
 
 export const roomPath = (room) => join('/rooms/', isObject(room) ? room.slug : room)
 
