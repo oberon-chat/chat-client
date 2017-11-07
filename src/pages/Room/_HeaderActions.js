@@ -15,20 +15,20 @@ const RoomHeaderActions = ({ handleLeave, isSubscribed, isDirectMessage }) => {
   const roomSettings = (
     <Menu>
       <Menu.Item>
-        { isSubscribed && !isDirectMessage && 
-          <button onClick={ handleLeave }>Leave Room</button>
+        { isSubscribed && !isDirectMessage &&
+          <button onClick={handleLeave}>Leave Room</button>
         }
       </Menu.Item>
     </Menu>
   )
 
-	return (
-  	<div className='chat-room-header-actions'>
-    	<Dropdown overlay={roomSettings} placement="bottomRight">
-      	<Button className='anchor' icon='setting' />
-    	</Dropdown>
-  	</div>
-	)
+  return (
+    <div className='chat-room-header-actions'>
+      <Dropdown overlay={roomSettings} placement='bottomRight'>
+        <Button className='anchor' icon='setting' />
+      </Dropdown>
+    </div>
+  )
 }
 
 RoomHeaderActions.displayName = 'RoomHeaderActions'

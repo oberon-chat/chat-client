@@ -10,9 +10,9 @@ const RoomHeader = ({ heading, isDirectMessage, isSubscribed, room }) => (
   <Header>
     <h2>{ heading }</h2>
     <RoomHeaderActions
-      room={ room }
-      isSubscribed={ isSubscribed }
-      isDirectMessage={ isDirectMessage }
+      room={room}
+      isSubscribed={isSubscribed}
+      isDirectMessage={isDirectMessage}
     />
   </Header>
 )
