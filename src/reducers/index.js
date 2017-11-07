@@ -13,6 +13,7 @@ import roomsMetaReducer from './roomsMeta'
 import roomMessagesReducer from './roomMessages'
 import roomSubscriptionsReducer from './roomSubscriptions'
 import socketReducer from './socket'
+import starMessagesReducer from './starMessages'
 import supportRoomsReducer from './supportRooms'
 import usersReducer from './users'
 import userSubscriptionsReducer from './userSubscriptions'
@@ -32,6 +33,7 @@ export default combineReducers({
   roomSubscriptions: roomSubscriptionsReducer,
   routing: routerReducer,
   socket: socketReducer,
+  starMessages: starMessagesReducer,
   supportRooms: supportRoomsReducer,
   users: usersReducer,
   userSubscriptions: userSubscriptionsReducer

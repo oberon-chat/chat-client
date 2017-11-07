@@ -157,6 +157,10 @@
         display: block; }
       #chat-root .message:hover .message-actions {
         display: block; }
+    #chat-root .message .star-message.starred {
+      color: #ffd700; }
+    #chat-root .message .star-message.unstarred {
+      color: #333; }
   #chat-root .chat-message-form {
     display: flex;
     justify-content: space-between;

@@ -1,10 +1,11 @@
 import { reverse } from 'lodash'
+import { getRoomsChannel } from '../reducers/rooms'
 import { joinChannel, leaveChannel } from './channels'
 import { addPublicRoom, replacePublicRooms } from './publicRooms'
 import { addMessage, removeMessage, replaceMessage, replaceMessages } from './roomMessages'
 import { addRoomSubscription, removeRoomSubscription, replaceRoomSubscription, replaceRoomSubscriptions } from './roomSubscriptions'
-import { getRoomsChannel } from '../reducers/rooms'
-import { camelize } from '../helpers/data'
+import { replaceStarMessages, starMessage, unstarMessage } from './starMessage'
+import { camelize, listToObject } from '../helpers/data'
 
 export const createRoom = (name, type, onSuccess, onError) => (dispatch, getState) => {
   const channel = getRoomsChannel(getState())
@@ -29,6 +30,13 @@ export const joinRoomsChannel = (onSuccess, onError) => (dispatch, getState) => 
 
     channel.on('rooms:public:created', (data) => {
       dispatch(addPublicRoom(data))
+    })
+
+    channel.on('starred_messages', (data) => {
+      const cased = camelize(data['starred_messages'])
+      const asObject = listToObject(cased, 'messageId')
+
+      dispatch(replaceStarMessages(asObject))
     })
 
     return channel
@@ -72,6 +80,14 @@ export const joinRoomChannel = (slug, onSuccess, onError) => (dispatch, getState
 
     channel.on('message:deleted', (data) => (
       dispatch(removeMessage(slug, camelize(data)))
+    ))
+
+    channel.on('starred_message:created', (data) => (
+      dispatch(starMessage(camelize(data, {})))
+    ))
+
+    channel.on('starred_message:deleted', (data) => (
+      dispatch(unstarMessage(camelize(data, {})))
     ))
 
     return channel

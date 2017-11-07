@@ -4,6 +4,7 @@ import { map } from 'lodash'
 import moment from 'moment'
 import { getCurrentUser } from '../../reducers/currentUser'
 import { getRoomMessages } from '../../reducers/roomMessages'
+import { getIsStarred } from '../../reducers/starMessages'
 import { scrollToBottom } from '../../helpers/scroll'
 import Message from './_One'
 
@@ -19,7 +20,7 @@ class MessageList extends Component {
   }
 
   render () {
-    const { currentUser, editingMessageId, messages, room } = this.props
+    const { currentUser, editingMessageId, messages, room, isStarred } = this.props
     let messageUser = {}
     let messageStart
 
@@ -45,6 +46,7 @@ class MessageList extends Component {
       return (
         <Message
           key={message.id}
+          isStarred={isStarred(message)}
           editing={editingMessageId === message.id}
           message={message}
           currentUser={currentUser}
@@ -64,7 +66,8 @@ class MessageList extends Component {
 
 const mapStateToProps = (state, { room }) => ({
   currentUser: getCurrentUser(state),
-  messages: getRoomMessages(state, room)
+  messages: getRoomMessages(state, room),
+  isStarred: (message) => getIsStarred(state, message.id)
 })
 
 export default connect(mapStateToProps)(MessageList)

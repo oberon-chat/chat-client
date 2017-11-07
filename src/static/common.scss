@@ -232,6 +232,17 @@
         display: block;
       }
     }
+
+    .star-message {
+
+      &.starred {
+        color: #ffd700;
+      }
+
+      &.unstarred {
+        color: #333;
+      }
+    }
   }
 
   .chat-message-form {

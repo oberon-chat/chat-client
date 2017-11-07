@@ -5,7 +5,7 @@ import Markdown from '../../components/Markdown'
 import Tooltip from '../../components/Tooltip'
 import { Avatar, Icon } from 'antd'
 
-const Message = ({ currentUser, editing, message, onDelete, renderHeading, room }) => {
+const Message = ({ currentUser, editing, isStarred, message, onDelete, renderHeading, room }) => {
   const { body, insertedAt, user } = message
 
   return (
@@ -36,11 +36,13 @@ const Message = ({ currentUser, editing, message, onDelete, renderHeading, room 
             { editing && <Icon type='edit' /> }
           </div>
         }
+
         <Markdown value={body} />
         <MessageActions
           currentUser={currentUser}
           message={message}
           room={room}
+          isStarred={isStarred}
         />
       </div>
     </div>
