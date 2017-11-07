@@ -9,7 +9,7 @@ const Rooms = ({ match }) => {
 
   return (
     <Main>
-      { map(rooms, (room) => <Room messageId={messageId} room={room} />) }
+      { map(rooms, (room) => <Room key={room} messageId={messageId} room={room} />) }
     </Main>
   )
 }
