@@ -1,6 +1,7 @@
-import { map } from 'lodash'
+import { isEmpty, map } from 'lodash'
 import { joinRoomChannel } from './rooms'
 import { getRoomChannel } from '../reducers/rooms'
+import { getViewing } from '../reducers/roomsMeta'
 import { getRooms } from '../reducers/userSubscriptions'
 
 export const createSubscription = (slug, onSuccess, onError) => (dispatch, getState) => {
@@ -17,6 +18,22 @@ export const updateSubscription = (slug, values, onSuccess, onError) => (dispatc
 
   return channel
     .push('room:subscription:update', values)
+    .receive('ok', (response) => onSuccess && onSuccess(response))
+    .receive('error', (response) => onError && onError(response))
+}
+
+export const viewSubscription = (slug, onSuccess, onError) => (dispatch, getState) => {
+  const state = getState()
+  const lastRoomSlug = getViewing(state)
+  const lastRoomChannel = getRoomChannel(state, lastRoomSlug)
+  const nextRoomChannel = getRoomChannel(state, slug)
+
+  if (!isEmpty(lastRoomChannel)) {
+    lastRoomChannel.push('room:subscription:view')
+  }
+
+  return nextRoomChannel
+    .push('room:subscription:view')
     .receive('ok', (response) => onSuccess && onSuccess(response))
     .receive('error', (response) => onError && onError(response))
 }

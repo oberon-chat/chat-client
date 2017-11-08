@@ -1,4 +1,4 @@
-import { find, first, reduce } from 'lodash'
+import { findKey, first, isEmpty, reduce } from 'lodash'
 
 const initialState = {}
 
@@ -9,9 +9,9 @@ export const roomsMetaReducer = (state = initialState, action) => {
 
       return reduce(withCurrentRoom, (acc, value, room) => {
         if (room === action.room) {
-          acc[room] = { ...value, viewing: true, lastViewed: Date.now() }
+          acc[room] = { ...value, viewing: true }
         } else if (value.viewing) {
-          acc[room] = { ...value, viewing: false, lastViewed: Date.now() }
+          acc[room] = { ...value, viewing: false }
         } else {
           acc[room] = value
         }
@@ -25,13 +25,13 @@ export const roomsMetaReducer = (state = initialState, action) => {
 
 export const getRoomsMeta = (state) => state.roomsMeta || {}
 export const getRoomMeta = (state, slug) => getRoomsMeta(state)[slug] || {}
-export const getLastViewed = (state, slug) => getRoomMeta(state, slug).lastViewed
+export const getViewing = (state) => findKey(getRoomsMeta(state), (room) => room.viewing) || {}
 export const getActive = (state) => {
   const rooms = getRoomsMeta(state)
-  const found = find(rooms, (room) => room.viewing)
+  const found = getViewing(state)
   const fallback = first(rooms) || {}
 
-  return found || fallback
+  return isEmpty(found) ? fallback : found
 }
 
 export default roomsMetaReducer

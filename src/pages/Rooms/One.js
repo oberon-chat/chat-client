@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import history from '../../app/history'
 import { joinRoomChannel, viewRoom } from '../../actions/rooms'
+import { viewSubscription } from '../../actions/userSubscriptions'
 import notification from '../../helpers/notification'
 import RoomContent from './_Content'
 import RoomHeader from './_Header'
@@ -41,7 +42,8 @@ const mapStateToProps = () => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onJoin: (room) => {
-    const onSuccess = () => {
+    const onSuccess = async () => {
+      await dispatch(viewSubscription(room))
       dispatch(viewRoom(room))
     }
 
