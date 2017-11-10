@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-if [ -z $PORT ]; then
-  PORT=8032
+if [ -z $PORTABLE_PORT ]; then
+  PORTABLE_PORT=8032
 fi
 
 cp ./build/static/js/portable.js ./bin/portable-server/
 cp ./build/static/css/portable.css ./bin/portable-server/
 
-cd ./bin/portable-server && python -m SimpleHTTPServer $PORT
+cd ./bin/portable-server && python -m SimpleHTTPServer $PORTABLE_PORT
