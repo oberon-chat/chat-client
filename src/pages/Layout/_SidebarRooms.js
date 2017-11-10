@@ -33,11 +33,11 @@ const RoomsSidebar = ({ handleDirectMessageClose, rooms }) => {
         </div>
         <div>
           { notifications &&
-            <span className='notifications-count'>
+            <span className='notifications-count hide-on-focus'>
               { notifications }
             </span>
           }
-          <button className='anchor' onClick={handleClick}>
+          <button className='anchor hide-on-blur' onClick={handleClick}>
             <Icon type='close-circle-o' />
           </button>
         </div>
@@ -45,12 +45,28 @@ const RoomsSidebar = ({ handleDirectMessageClose, rooms }) => {
     )
   }
 
+  const displaySupportRoom = (room, notifications) => (
+    <InvisibleContainer>
+      <div>
+        { room.slug }
+      </div>
+      <div>
+        { notifications &&
+          <span className='notifications-count'>
+            { notifications }
+          </span>
+        }
+      </div>
+    </InvisibleContainer>
+  )
+
   return (
     <div id='rooms-sidebar'>
       <SidebarRoomsList
         title='Support Rooms'
         titleLink={searchRoomsPath}
         rooms={rooms.support}
+        displayRoom={displaySupportRoom}
       />
       <SidebarRoomsList
         title='Public Rooms'
