@@ -8,7 +8,7 @@ import { updateSubscription } from '../../actions/userSubscriptions'
 import { getCurrentUser } from '../../reducers/currentUser'
 import { getRoomUserIds } from '../../reducers/roomSubscriptions'
 import { getUsers } from '../../reducers/users'
-import { getRoomsByType } from '../../reducers/userSubscriptions'
+import { getSubscribedRoomsBy } from '../../reducers/userSubscriptions'
 import notification from '../../helpers/notification'
 import { roomPath } from '../../helpers/paths'
 import { searchUsers } from '../../helpers/search'
@@ -65,7 +65,7 @@ const mapStateToProps = (state) => {
   const matches = searchUsers(omitted, formData.search)
 
   // Direct message data
-  const directMessageSlugs = map(getRoomsByType(state, 'direct'), 'slug')
+  const directMessageSlugs = map(getSubscribedRoomsBy(state, {type: 'direct'}), 'slug')
   const directMessageUserIds = reduce(directMessageSlugs, (acc, slug) => {
     acc[slug] = getRoomUserIds(state, slug)
 

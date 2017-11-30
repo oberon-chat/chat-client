@@ -50,7 +50,8 @@ export const getUsersLastRoomMessage = (state, slug, user) => (
 export const getRoomMessagesAfter = (state, slug, timestamp) => {
   const messages = getRoomMessages(state, slug)
 
-  let i, result = []
+  let result = []
+  let i
 
   for (i = messages.length - 1; i > 0; i--) {
     const message = messages[i]

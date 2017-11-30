@@ -1,11 +1,19 @@
 import { reverse } from 'lodash'
-import { getRoomsChannel } from '../reducers/rooms'
+import { getRoomChannel, getRoomsChannel } from '../reducers/rooms'
 import { joinChannel, leaveChannel } from './channels'
 import { addPublicRoom, replacePublicRooms } from './publicRooms'
 import { addMessage, removeMessage, replaceMessage, replaceMessages } from './roomMessages'
 import { addRoomSubscription, removeRoomSubscription, replaceRoomSubscription, replaceRoomSubscriptions } from './roomSubscriptions'
 import { replaceStarMessages, starMessage, unstarMessage } from './starMessage'
 import { camelize, listToObject } from '../helpers/data'
+
+export const archiveRoom = (slug, onSuccess, onError) => (dispatch, getState) => {
+  const channel = getRoomChannel(getState(), slug)
+  return channel
+    .push('room:archive')
+    .receive('ok', (response) => onSuccess && onSuccess(response))
+    .receive('error', (response) => onError && onError(response))
+}
 
 export const createRoom = (name, type, onSuccess, onError) => (dispatch, getState) => {
   const channel = getRoomsChannel(getState())
@@ -100,4 +108,12 @@ export const leaveRoomChannel = (slug) => (dispatch) => {
   const key = 'room:' + slug
 
   return dispatch(leaveChannel(key))
+}
+
+export const reactivateRoom = (slug, onSuccess, onError) => (dispatch, getState) => {
+  const channel = getRoomChannel(getState(), slug)
+  return channel
+    .push('room:reactivate')
+    .receive('ok', (response) => onSuccess && onSuccess(response))
+    .receive('error', (response) => onError && onError(response))
 }

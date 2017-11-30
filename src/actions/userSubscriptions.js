@@ -2,7 +2,7 @@ import { isEmpty, map } from 'lodash'
 import { joinRoomChannel } from './rooms'
 import { getRoomChannel } from '../reducers/rooms'
 import { getViewing } from '../reducers/roomsMeta'
-import { getRooms } from '../reducers/userSubscriptions'
+import { getSubscribedRooms } from '../reducers/userSubscriptions'
 
 export const createSubscription = (slug, onSuccess, onError) => (dispatch, getState) => {
   const channel = getRoomChannel(getState(), slug)
@@ -68,7 +68,7 @@ export const removeUserSubscription = (subscription) => ({
 })
 
 export const joinAllRoomChannels = () => (dispatch, getState) => {
-  const rooms = getRooms(getState())
+  const rooms = getSubscribedRooms(getState())
   const join = (room) => dispatch(joinRoomChannel(room.slug))
 
   return map(rooms, join)

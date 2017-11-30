@@ -1,19 +1,25 @@
+import { isEmpty } from 'lodash'
 import { getChannel } from './channels'
+import { getPublicRoom } from './publicRooms'
+import { getSupportRoom } from './supportRooms'
+import { getSubscribedRoom } from './userSubscriptions'
 
-const initialState = {}
+export const getRoom = (state, key) => {
+  const getters = [
+    getSubscribedRoom,
+    getPublicRoom,
+    getSupportRoom
+  ]
 
-export const roomsReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'UPDATE_ROOMS':
-      return action.rooms
-    default:
-      return state
+  for (let i = 0; i < getters.length; i++) {
+    const room = getSubscribedRoom(state, key)
+
+    if (!isEmpty(room)) {
+      return room
+    }
   }
-}
 
-export const getRooms = (state) => state.rooms || {}
-export const getRoom = (state, key) => getRooms(state)[key]
+  return {}
+}
 export const getRoomsChannel = (state) => getChannel(state, 'rooms')
 export const getRoomChannel = (state, key) => getChannel(state, 'room:' + key)
-
-export default roomsReducer
